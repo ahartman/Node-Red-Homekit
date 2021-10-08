@@ -31,7 +31,7 @@
         "id": "ac61d6b63edc7d80",
         "type": "tab",
         "label": "Homekit Switches",
-        "disabled": true,
+        "disabled": false,
         "info": ""
     },
     {
@@ -53,10 +53,7 @@
                 "y": 100,
                 "wires": [
                     {
-                        "id": "a38e848f.39acd8"
-                    },
-                    {
-                        "id": "1d763a5420a3fb9c"
+                        "id": "b0e14dcefa658091"
                     }
                 ]
             }
@@ -113,8 +110,8 @@
         ],
         "x": 794,
         "y": 299,
-        "w": 392,
-        "h": 82
+        "w": 252,
+        "h": 142
     },
     {
         "id": "5f38f820d8f596b6",
@@ -382,9 +379,12 @@
         "property": "payload",
         "topi": "topic",
         "x": 160,
-        "y": 60,
+        "y": 100,
         "wires": [
-            []
+            [
+                "a38e848f.39acd8",
+                "1d763a5420a3fb9c"
+            ]
         ]
     },
     {
@@ -526,7 +526,7 @@
         "type": "debug",
         "z": "ef737c5d.8fdfe",
         "name": "entities payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1519,7 +1519,7 @@
         "type": "debug",
         "z": "ef737c5d.8fdfe",
         "name": "entities names",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2049,8 +2049,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1050,
-        "y": 340,
+        "x": 910,
+        "y": 400,
         "wires": []
     },
     {
