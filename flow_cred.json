@@ -1,1 +1,22 @@
-{}
+{
+    "61506dc1.940954": {
+        "user": "ahartman2@me.com",
+        "pass": "pvcv-lgxl-oguf-ckug"
+    },
+    "3e48c330.8414ec": {
+        "user": "ahartman2@me.com",
+        "pass": "pvcv-lgxl-oguf-ckug"
+    },
+    "7b789b02.b3d6e4": {
+        "posLatitude": "51.3597424",
+        "posLongitude": "4.4833742"
+    },
+    "3a720637.38a402": {
+        "identity": "tradfri_1633624114586",
+        "preSharedKey": "NZyjmRUjy3plo6IS"
+    },
+    "117d334b145a0072": {
+        "identity": "tradfri_1633624142387",
+        "preSharedKey": "vELVetGKufCvmNhh"
+    }
+}
