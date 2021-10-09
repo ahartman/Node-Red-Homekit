@@ -54,6 +54,9 @@
                 "wires": [
                     {
                         "id": "b0e14dcefa658091"
+                    },
+                    {
+                        "id": "a0be59d028282e91"
                     }
                 ]
             }
@@ -66,7 +69,7 @@
         "id": "adb7c77aee928dbb",
         "type": "group",
         "z": "ac61d6b63edc7d80",
-        "name": "HomeKit Switch Accessory",
+        "name": "HomeKit Switch",
         "style": {
             "stroke": "#ffC000",
             "label": true
@@ -134,7 +137,7 @@
         "id": "000c7f2afbe57624",
         "type": "group",
         "z": "ac61d6b63edc7d80",
-        "name": "HomeKit Switch Accessory",
+        "name": "HomeKit Switch",
         "style": {
             "stroke": "#ffC000",
             "label": true
@@ -168,7 +171,7 @@
         "id": "cec0b675c632c86d",
         "type": "group",
         "z": "ac61d6b63edc7d80",
-        "name": "HomeKit Switch Accessory",
+        "name": "HomeKit Switch",
         "style": {
             "stroke": "#ffC000",
             "label": true
@@ -185,7 +188,7 @@
         "id": "e6b5b236f3e727ec",
         "type": "group",
         "z": "ac61d6b63edc7d80",
-        "name": "HomeKit Switch Accessory",
+        "name": "HomeKit Switch",
         "style": {
             "stroke": "#ffC000",
             "label": true
@@ -261,8 +264,8 @@
         "type": "tradfri-config",
         "name": "Tradfri Rodeweg",
         "gatewayHost": "TRADFRI-Gateway-4491602d06e1.local",
-        "identity": "tradfri_1633624114586",
-        "preSharedKey": "NZyjmRUjy3plo6IS"
+        "identity": "tradfri_1633693894750",
+        "preSharedKey": "P0OuzdNrErarWkEn"
     },
     {
         "id": "409001a1.3e7a78",
@@ -292,8 +295,8 @@
         "type": "tradfri-config",
         "name": "Tradfri Felix",
         "gatewayHost": "TRADFRI-Gateway-b8d7af2bba3b.local",
-        "identity": "tradfri_1633624142387",
-        "preSharedKey": "vELVetGKufCvmNhh"
+        "identity": "tradfri_1633693847406",
+        "preSharedKey": "Es001M9i5JjnxGZm"
     },
     {
         "id": "fd5b71cd.f759d",
@@ -310,7 +313,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 510,
+        "x": 530,
         "y": 100,
         "wires": [
             [
@@ -329,7 +332,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 350,
         "y": 100,
         "wires": [
             [
@@ -349,7 +352,7 @@
         "action": "{}",
         "accessories": [],
         "groups": [],
-        "x": 710,
+        "x": 730,
         "y": 100,
         "wires": []
     },
@@ -362,7 +365,7 @@
         "action": "{}",
         "accessories": [],
         "groups": [],
-        "x": 730,
+        "x": 750,
         "y": 160,
         "wires": []
     },
@@ -400,7 +403,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 330,
+        "x": 350,
         "y": 160,
         "wires": []
     },
@@ -409,7 +412,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "calc",
-        "func": "let lighting    = global.get('lighting')\nlet settings    = lighting.settings\nlet times       = lighting.times\nlet switches    = global.get('switches')\nlet sun         = switches.sun_position\nlet sun_percent = msg.payload.altitudePercent/100\nlet dateNow     = Date.now()\n\nif (sun == 'day'){\n    colorTemperature = (settings.set_max-settings.set_min) * sun_percent + settings.set_min\n    brightness = settings.brightness_max\n} else if (sun == 'night'){\n    colorTemperature = settings.set_min\n    brightness = settings.brightness_min\n} else {\n    if(sun == 'dawn'){\n        periodDuration = times.sunrise - times.dawn\n        periodActual = dateNow - times.dawn\n    } else if (sun == 'dusk') {\n        periodDuration = times.dusk - times.sunset\n        periodActual = times.dusk - dateNow\n    } else {\n        node.error({payload: 'problem in Calc', sun : praktijk.sun})\n    }\n    brightness = (settings.brightness_max - settings.brightness_min) * periodActual/periodDuration + settings.brightness_min\n    colorTemperature = settings.set_min\n}\ncolorTemperature = 100 - (100 * (colorTemperature - settings.bulb_min)/(settings.bulb_max - settings.bulb_min))\n\nnewMsg = {\n    'payload': {\n        'colorTemperature': parseInt(colorTemperature.toFixed(0)),\n        'brightness': parseInt(brightness.toFixed(0))\n        }\n    }\nreturn newMsg;",
+        "func": "let lighting    = global.get('lighting')\nlet settings    = lighting.settings\nlet times       = lighting.times\nlet switches    = global.get('switches')\nlet sun         = switches.sun_position\nlet sun_percent = msg.payload.altitudePercent/100\nlet dateNow     = Date.now()\n\nif (sun == 'day'){\n    colorTemperature = (settings.set_max-settings.set_min) * sun_percent + settings.set_min\n    brightness = settings.brightness_max\n} else if (sun == 'night'){\n    colorTemperature = settings.set_min\n    brightness = settings.brightness_min\n} else {\n    if(sun == 'dawn'){\n        periodDuration = times.sunrise - times.dawn\n        periodActual = dateNow - times.dawn\n    } else if (sun == 'dusk') {\n        periodDuration = times.dusk - times.sunset\n        periodActual = times.dusk - dateNow\n    } else {\n        node.error({payload: 'problem in Calc', sun : sun})\n    }\n    brightness = (settings.brightness_max - settings.brightness_min) * periodActual/periodDuration + settings.brightness_min\n    colorTemperature = settings.set_min\n}\ncolorTemperature = 100 - (100 * (colorTemperature - settings.bulb_min)/(settings.bulb_max - settings.bulb_min))\n\nnewMsg = {\n    'payload': {\n        'colorTemperature': parseInt(colorTemperature.toFixed(0)),\n        'brightness': parseInt(brightness.toFixed(0))\n        }\n    }\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -451,7 +454,7 @@
         "positionConfig": "7b789b02.b3d6e4",
         "rules": [],
         "onlyOnChange": "true",
-        "topic": "msg.topic",
+        "topic": "",
         "outputs": 1,
         "start": "",
         "startType": "none",
@@ -1194,7 +1197,7 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set straatlamp",
-        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\nnode.warn('sun' + sun)\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
+        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1674,7 +1677,7 @@
         "type": "debug",
         "z": "ef737c5d.8fdfe",
         "name": "set monitored states",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1724,6 +1727,13 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "switches.restart_lights",
+                "pt": "global",
                 "to": "true",
                 "tot": "bool"
             }
@@ -2736,7 +2746,9 @@
         "x": 420,
         "y": 40,
         "wires": [
-            []
+            [
+                "bdc7e902b18cec4f"
+            ]
         ]
     },
     {
@@ -2783,7 +2795,7 @@
             "66057579505151f3",
             "8218126c12e4d8a2"
         ],
-        "x": 195,
+        "x": 175,
         "y": 360,
         "wires": [
             [
@@ -3221,23 +3233,11 @@
         "wires": []
     },
     {
-        "id": "ef5bf9686485cc51",
-        "type": "tradfri-monitor",
-        "z": "ef737c5d.8fdfe",
-        "gateway": "117d334b145a0072",
-        "name": "Tradfri Felix",
-        "x": 110,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "2b9a42b5d908a3a1",
         "type": "function",
         "z": "af688e5.b55d57",
         "name": "setting switches to defaults",
-        "func": "let temp = {\n        bureau_lichtgestuurd : \"on\",\n        felix_lichtgestuurd : \"off\",\n        felix_ontwaaklicht : \"off\",\n        praktijk_agendagestuurd : \"on\"\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    node.warn('switches OK')\n}",
+        "func": "let temp = {\n        bureau_lichtgestuurd : \"on\",\n        felix_lichtgestuurd : \"off\",\n        felix_ontwaaklicht : \"off\",\n        praktijk_agendagestuurd : \"on\",\n        restart_lights : false\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    //node.warn('switches OK')\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3247,6 +3247,105 @@
         "y": 200,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "bdc7e902b18cec4f",
+        "type": "debug",
+        "z": "af688e5.b55d57",
+        "name": "sun position",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "18f48d3f47284108",
+        "type": "tradfri-monitor",
+        "z": "ef737c5d.8fdfe",
+        "gateway": "117d334b145a0072",
+        "name": "Tradfri",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "8d80ed1299f0421c"
+            ]
+        ]
+    },
+    {
+        "id": "a0be59d028282e91",
+        "type": "switch",
+        "z": "7535b2d2.99fc5c",
+        "name": "restartLights",
+        "property": "switches.restart_lights",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "a38e848f.39acd8",
+                "52799f7f7e75939f"
+            ]
+        ]
+    },
+    {
+        "id": "2e1515e95cf7174a",
+        "type": "debug",
+        "z": "7535b2d2.99fc5c",
+        "name": "IKEA restart",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "52799f7f7e75939f",
+        "type": "change",
+        "z": "7535b2d2.99fc5c",
+        "name": "restart false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "switches.restart_lights",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "2e1515e95cf7174a"
+            ]
         ]
     }
 ]
