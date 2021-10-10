@@ -50,7 +50,7 @@
         "in": [
             {
                 "x": 40,
-                "y": 100,
+                "y": 160,
                 "wires": [
                     {
                         "id": "b0e14dcefa658091"
@@ -314,7 +314,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "x": 530,
-        "y": 100,
+        "y": 160,
         "wires": [
             [
                 "7302852c.5e9e84"
@@ -326,20 +326,26 @@
         "type": "function",
         "z": "7535b2d2.99fc5c",
         "name": "Split payload",
-        "func": "let payload = msg.payload\n\nlet transition = 5\n\nlet brightness = {\n    topic: msg.topic,\n    payload: {\n        transitionTime : transition,\n        brightness: payload.brightness\n    }\n}\n\nvar colorTemperature = null\nif (payload.hasOwnProperty('colorTemperature')) {\n    colorTemperature = {\n        topic: msg.topic,\n        payload: {\n            transitionTime : transition,\n            colorTemperature: payload.colorTemperature\n        }\n    }\n}\n\nif(msg.topic.length > 0){\n    return [colorTemperature, brightness]\n} else {\n    node.warn(\"Empty Tradfri message\")\n}",
-        "outputs": 2,
+        "func": "let payload = msg.payload\nlet transition = 5\nvar msg0 = msg1 = msg2 = msg3 = null\n\nfunction myFunction(entities) {\n    let brightness = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            brightness: payload.brightness\n        }\n    }\n    let colorTemperature = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            colorTemperature: payload.colorTemperature\n        }\n    }\n    return [colorTemperature, brightness]\n}\n\nlet RW = msg.entitiesTest.entitiesRW\nif(RW.length > 0) {\n    [msg0,msg1] = myFunction(RW)\n}\n\nlet F = msg.entitiesTest.entitiesF\nif(F.length > 0) {\n    [msg2,msg3] = myFunction(F)\n}\n\nreturn [msg0,msg1,msg2,msg3]",
+        "outputs": 4,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 100,
+        "y": 180,
         "wires": [
             [
                 "fd5b71cd.f759d"
             ],
             [
                 "994c6b54.5d27c8"
+            ],
+            [
+                "116cea5fcbeeafa1"
+            ],
+            [
+                "ab6ebce29c989b3b"
             ]
         ]
     },
@@ -353,7 +359,7 @@
         "accessories": [],
         "groups": [],
         "x": 730,
-        "y": 100,
+        "y": 160,
         "wires": []
     },
     {
@@ -366,7 +372,7 @@
         "accessories": [],
         "groups": [],
         "x": 750,
-        "y": 160,
+        "y": 220,
         "wires": []
     },
     {
@@ -382,7 +388,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 160,
-        "y": 100,
+        "y": 180,
         "wires": [
             [
                 "a38e848f.39acd8",
@@ -404,7 +410,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 350,
-        "y": 160,
+        "y": 260,
         "wires": []
     },
     {
@@ -508,7 +514,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\nlet entities    = []\nlet names       = []\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd == 'on'){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    return msg\n}\n\n",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\nlet entities    = []\nlet entitiesRW  = []\nlet entitiesF   = []\nlet entitiesTest= {}\nlet names       = []\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            entitiesRW.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd == 'on'){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           entitiesF.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nentitiesTest = {\n    entitiesRW : entitiesRW,\n    entitiesF : entitiesF\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    msg.entitiesTest = entitiesTest\n    msg.concat = entitiesRW.concat(entitiesF)\n    return msg\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1526,8 +1532,8 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "names",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 940,
@@ -2770,7 +2776,7 @@
         "y": 180,
         "wires": [
             [
-                "66057579505151f3"
+                "1dfdf78ca5273b89"
             ]
         ]
     },
@@ -2782,7 +2788,7 @@
         "links": [
             "e8d02cba847d5740"
         ],
-        "x": 795,
+        "x": 875,
         "y": 180,
         "wires": []
     },
@@ -3284,7 +3290,7 @@
         "id": "a0be59d028282e91",
         "type": "switch",
         "z": "7535b2d2.99fc5c",
-        "name": "restartLights",
+        "name": "restart_lights",
         "property": "switches.restart_lights",
         "propertyType": "global",
         "rules": [
@@ -3296,7 +3302,7 @@
         "repair": false,
         "outputs": 1,
         "x": 170,
-        "y": 220,
+        "y": 100,
         "wires": [
             [
                 "a38e848f.39acd8",
@@ -3318,7 +3324,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 530,
-        "y": 220,
+        "y": 100,
         "wires": []
     },
     {
@@ -3341,10 +3347,71 @@
         "to": "",
         "reg": false,
         "x": 350,
-        "y": 220,
+        "y": 100,
         "wires": [
             [
                 "2e1515e95cf7174a"
+            ]
+        ]
+    },
+    {
+        "id": "116cea5fcbeeafa1",
+        "type": "debug",
+        "z": "7535b2d2.99fc5c",
+        "name": "Felix color",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ab6ebce29c989b3b",
+        "type": "debug",
+        "z": "7535b2d2.99fc5c",
+        "name": "Felix brightness",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1dfdf78ca5273b89",
+        "type": "change",
+        "z": "ac61d6b63edc7d80",
+        "name": "restart",
+        "rules": [
+            {
+                "t": "set",
+                "p": "switches.restart_lights",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "66057579505151f3"
             ]
         ]
     }
