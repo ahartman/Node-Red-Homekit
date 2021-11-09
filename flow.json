@@ -21,9 +21,9 @@
         "info": ""
     },
     {
-        "id": "8de679a753371272",
+        "id": "b798ba0e.5afac8",
         "type": "tab",
-        "label": "Shelly sturing",
+        "label": "Regels",
         "disabled": false,
         "info": ""
     },
@@ -35,9 +35,9 @@
         "info": ""
     },
     {
-        "id": "b798ba0e.5afac8",
+        "id": "8de679a753371272",
         "type": "tab",
-        "label": "Regels",
+        "label": "Shelly sturing",
         "disabled": false,
         "info": ""
     },
@@ -53,10 +53,10 @@
                 "y": 160,
                 "wires": [
                     {
-                        "id": "b0e14dcefa658091"
+                        "id": "a0be59d028282e91"
                     },
                     {
-                        "id": "a0be59d028282e91"
+                        "id": "b0e14dcefa658091"
                     }
                 ]
             }
@@ -78,9 +78,7 @@
             "ab79988be2241e31"
         ],
         "x": 254,
-        "y": 59,
-        "w": 232,
-        "h": 82
+        "y": 59
     },
     {
         "id": "a88344fd46a1a258",
@@ -95,9 +93,7 @@
             "200e97d616d139f2"
         ],
         "x": 54,
-        "y": 39,
-        "w": 172,
-        "h": 122
+        "y": 39
     },
     {
         "id": "575b777b8d0ef00f",
@@ -111,10 +107,8 @@
             "120e953ab7375f77",
             "df918f0df9bffdd1"
         ],
-        "x": 794,
-        "y": 299,
-        "w": 252,
-        "h": 142
+        "x": 754,
+        "y": 299
     },
     {
         "id": "5f38f820d8f596b6",
@@ -129,9 +123,7 @@
             "de23e2e4d966a81d"
         ],
         "x": 54,
-        "y": 199,
-        "w": 172,
-        "h": 122
+        "y": 199
     },
     {
         "id": "000c7f2afbe57624",
@@ -146,9 +138,7 @@
             "011a13273f3a770e"
         ],
         "x": 254,
-        "y": 219,
-        "w": 232,
-        "h": 82
+        "y": 219
     },
     {
         "id": "006589780663fc45",
@@ -163,9 +153,7 @@
             "0de4b20b1f6c9191"
         ],
         "x": 54,
-        "y": 499,
-        "w": 172,
-        "h": 122
+        "y": 499
     },
     {
         "id": "cec0b675c632c86d",
@@ -180,9 +168,7 @@
             "f6b0fb33851499cd"
         ],
         "x": 254,
-        "y": 519,
-        "w": 272,
-        "h": 82
+        "y": 519
     },
     {
         "id": "e6b5b236f3e727ec",
@@ -197,9 +183,7 @@
             "5d3b03dbb4ea9801"
         ],
         "x": 254,
-        "y": 379,
-        "w": 232,
-        "h": 82
+        "y": 379
     },
     {
         "id": "9c9496ec1aad230d",
@@ -214,9 +198,7 @@
             "9a0d28d3bce71307"
         ],
         "x": 54,
-        "y": 359,
-        "w": 172,
-        "h": 122
+        "y": 359
     },
     {
         "id": "7b789b02.b3d6e4",
@@ -313,6 +295,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
+        "outputs": 1,
         "x": 530,
         "y": 160,
         "wires": [
@@ -326,7 +309,7 @@
         "type": "function",
         "z": "7535b2d2.99fc5c",
         "name": "Split payload",
-        "func": "let payload = msg.payload\nlet transition = 5\nvar msg0 = msg1 = msg2 = msg3 = null\n\nfunction myFunction(entities) {\n    let brightness = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            brightness: payload.brightness\n        }\n    }\n    let colorTemperature = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            colorTemperature: payload.colorTemperature\n        }\n    }\n    return [colorTemperature, brightness]\n}\n\nlet RW = msg.entitiesTest.entitiesRW\nif(RW.length > 0) {\n    [msg0,msg1] = myFunction(RW)\n}\n\nlet F = msg.entitiesTest.entitiesF\nif(F.length > 0) {\n    [msg2,msg3] = myFunction(F)\n}\n\nreturn [msg0,msg1,msg2,msg3]",
+        "func": "let payload = msg.payload\nlet transition = 5\nvar msg0 = msg1 = msg2 = msg3 = null\n\nfunction myFunction(entities) {\n    let brightness = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            brightness: payload.brightness\n        }\n    }\n    let colorTemperature = {\n        topic: entities,\n        payload: {\n            transitionTime : transition,\n            colorTemperature: payload.colorTemperature\n        }\n    }\n    return [colorTemperature, brightness]\n}\n\nif (!payload.hasOwnProperty('brightness') && !payload.hasOwnProperty('colorTemperature')) {\n    \n}\n    \nlet RW = msg.entitiesAll.entitiesRW\nif(RW.length > 0) {\n    [msg0,msg1] = myFunction(RW)\n}\n\nlet F = msg.entitiesAll.entitiesF\nif(F.length > 0) {\n    [msg2,msg3] = myFunction(F)\n}\n\nreturn [msg0,msg1,msg2,msg3]",
         "outputs": 4,
         "noerr": 0,
         "initialize": "",
@@ -342,10 +325,10 @@
                 "994c6b54.5d27c8"
             ],
             [
-                "116cea5fcbeeafa1"
+                "355e367fa158c3be"
             ],
             [
-                "ab6ebce29c989b3b"
+                "70e5b7b5463b48c2"
             ]
         ]
     },
@@ -372,7 +355,7 @@
         "accessories": [],
         "groups": [],
         "x": 750,
-        "y": 220,
+        "y": 200,
         "wires": []
     },
     {
@@ -411,6 +394,1644 @@
         "statusType": "auto",
         "x": 350,
         "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a0be59d028282e91",
+        "type": "switch",
+        "z": "7535b2d2.99fc5c",
+        "name": "restart_lights",
+        "property": "switches.restart_lights",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "a38e848f.39acd8",
+                "52799f7f7e75939f"
+            ]
+        ]
+    },
+    {
+        "id": "2e1515e95cf7174a",
+        "type": "debug",
+        "z": "7535b2d2.99fc5c",
+        "name": "IKEA restart",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "52799f7f7e75939f",
+        "type": "change",
+        "z": "7535b2d2.99fc5c",
+        "name": "restart false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "switches.restart_lights",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "2e1515e95cf7174a"
+            ]
+        ]
+    },
+    {
+        "id": "355e367fa158c3be",
+        "type": "tradfri-light-control",
+        "z": "7535b2d2.99fc5c",
+        "gateway": "117d334b145a0072",
+        "name": "Felix lights (color)",
+        "action": "{}",
+        "accessories": [],
+        "groups": [],
+        "x": 730,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "70e5b7b5463b48c2",
+        "type": "tradfri-light-control",
+        "z": "7535b2d2.99fc5c",
+        "gateway": "117d334b145a0072",
+        "name": "Felix lights (brightness)",
+        "action": "{}",
+        "accessories": [],
+        "groups": [],
+        "x": 740,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8c783443.62489",
+        "type": "inject",
+        "z": "af688e5.b55d57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 01 * * *",
+        "once": false,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "acc78091.ea4ed"
+            ]
+        ]
+    },
+    {
+        "id": "acc78091.ea4ed",
+        "type": "sun-position",
+        "z": "af688e5.b55d57",
+        "name": "sun %",
+        "positionConfig": "7b789b02.b3d6e4",
+        "rules": [],
+        "onlyOnChange": "true",
+        "topic": "",
+        "outputs": 1,
+        "start": "",
+        "startType": "none",
+        "startOffset": 0,
+        "startOffsetType": "none",
+        "startOffsetMultiplier": 60000,
+        "end": "",
+        "endType": "none",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 60000,
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "c1cb07db.8f1bf8"
+            ]
+        ]
+    },
+    {
+        "id": "c1cb07db.8f1bf8",
+        "type": "change",
+        "z": "af688e5.b55d57",
+        "name": "set lighting times",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lighting.settings",
+                "pt": "global",
+                "to": "{\"bulb_max\":4000,\"bulb_min\":2200,\"set_max\":3500,\"set_min\":2500,\"brightness_max\":95,\"brightness_min\":70}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "lighting.times.dawn",
+                "pt": "global",
+                "to": "payload.times.nauticalDawn.value",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "lighting.times.sunrise",
+                "pt": "global",
+                "to": "payload.times.sunrise.value",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "lighting.times.sunset",
+                "pt": "global",
+                "to": "payload.times.sunset.value",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "lighting.times.dusk",
+                "pt": "global",
+                "to": "payload.times.nauticalDusk.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "fe9a3513.4fbe68"
+            ]
+        ]
+    },
+    {
+        "id": "fe9a3513.4fbe68",
+        "type": "debug",
+        "z": "af688e5.b55d57",
+        "name": "set lighting",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "8a2d9888.d39c1",
+        "type": "inject",
+        "z": "af688e5.b55d57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "acc78091.ea4ed",
+                "2b9a42b5d908a3a1"
+            ]
+        ]
+    },
+    {
+        "id": "72415e18dc28ead0",
+        "type": "inject",
+        "z": "af688e5.b55d57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"onOff\":false}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "a76d2327be262b28"
+            ]
+        ]
+    },
+    {
+        "id": "3130e6f150af0d5d",
+        "type": "inject",
+        "z": "af688e5.b55d57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"onOff\":true}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "a76d2327be262b28"
+            ]
+        ]
+    },
+    {
+        "id": "9aac430f6643bd61",
+        "type": "suncron",
+        "z": "af688e5.b55d57",
+        "name": "sun test",
+        "lat": "51.3597424",
+        "lon": "4.4833742",
+        "replay": true,
+        "ejectScheduleOnUpdate": false,
+        "sunrisePayload": "day",
+        "sunrisePayloadType": "str",
+        "sunriseTopic": "",
+        "sunriseOffsetType": 1,
+        "sunriseOffsetHours": 0,
+        "sunriseOffsetMinutes": 0,
+        "sunriseOffset": 0,
+        "sunriseEndPayload": "",
+        "sunriseEndPayloadType": "str",
+        "sunriseEndTopic": "",
+        "sunriseEndOffsetType": 1,
+        "sunriseEndOffsetHours": 0,
+        "sunriseEndOffsetMinutes": 0,
+        "sunriseEndOffset": 0,
+        "goldenHourEndPayload": "",
+        "goldenHourEndPayloadType": "str",
+        "goldenHourEndTopic": "",
+        "goldenHourEndOffsetType": 1,
+        "goldenHourEndOffsetHours": 0,
+        "goldenHourEndOffsetMinutes": 0,
+        "goldenHourEndOffset": 0,
+        "solarNoonPayload": "",
+        "solarNoonPayloadType": "str",
+        "solarNoonTopic": "",
+        "solarNoonOffsetType": 1,
+        "solarNoonOffsetHours": 0,
+        "solarNoonOffsetMinutes": 0,
+        "solarNoonOffset": 0,
+        "goldenHourPayload": "",
+        "goldenHourPayloadType": "str",
+        "goldenHourTopic": "",
+        "goldenHourOffsetType": 1,
+        "goldenHourOffsetHours": 0,
+        "goldenHourOffsetMinutes": 0,
+        "goldenHourOffset": 0,
+        "sunsetStartPayload": "",
+        "sunsetStartPayloadType": "str",
+        "sunsetStartTopic": "",
+        "sunsetStartOffsetType": 1,
+        "sunsetStartOffsetHours": 0,
+        "sunsetStartOffsetMinutes": 0,
+        "sunsetStartOffset": 0,
+        "sunsetPayload": "dusk",
+        "sunsetPayloadType": "str",
+        "sunsetTopic": "",
+        "sunsetOffsetType": 1,
+        "sunsetOffsetHours": 0,
+        "sunsetOffsetMinutes": 0,
+        "sunsetOffset": 0,
+        "duskPayload": "",
+        "duskPayloadType": "str",
+        "duskTopic": "",
+        "duskOffsetType": 1,
+        "duskOffsetHours": 0,
+        "duskOffsetMinutes": 0,
+        "duskOffset": 0,
+        "nauticalDuskPayload": "night",
+        "nauticalDuskPayloadType": "str",
+        "nauticalDuskTopic": "",
+        "nauticalDuskOffsetType": 1,
+        "nauticalDuskOffsetHours": 0,
+        "nauticalDuskOffsetMinutes": 0,
+        "nauticalDuskOffset": 0,
+        "nightPayload": "",
+        "nightPayloadType": "str",
+        "nightTopic": "",
+        "nightOffsetType": 1,
+        "nightOffsetHours": 0,
+        "nightOffsetMinutes": 0,
+        "nightOffset": 0,
+        "nadirPayload": "",
+        "nadirPayloadType": "str",
+        "nadirTopic": "",
+        "nadirOffsetType": 1,
+        "nadirOffsetHours": 0,
+        "nadirOffsetMinutes": 0,
+        "nadirOffset": 0,
+        "nightEndPayload": "",
+        "nightEndPayloadType": "str",
+        "nightEndTopic": "",
+        "nightEndOffsetType": 1,
+        "nightEndOffsetHours": 0,
+        "nightEndOffsetMinutes": 0,
+        "nightEndOffset": 0,
+        "nauticalDawnPayload": "dawn",
+        "nauticalDawnPayloadType": "str",
+        "nauticalDawnTopic": "",
+        "nauticalDawnOffsetType": 1,
+        "nauticalDawnOffsetHours": 0,
+        "nauticalDawnOffsetMinutes": 0,
+        "nauticalDawnOffset": 0,
+        "dawnPayload": "",
+        "dawnPayloadType": "str",
+        "dawnTopic": "",
+        "dawnOffsetType": 1,
+        "dawnOffsetHours": 0,
+        "dawnOffsetMinutes": 0,
+        "dawnOffset": 0,
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "38d971fb1f7b5524"
+            ]
+        ]
+    },
+    {
+        "id": "38d971fb1f7b5524",
+        "type": "change",
+        "z": "af688e5.b55d57",
+        "name": "set global",
+        "rules": [
+            {
+                "t": "set",
+                "p": "switches.sun_position",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload = \"day\" ? \"off\" : \"on\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sun",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "bdc7e902b18cec4f"
+            ]
+        ]
+    },
+    {
+        "id": "2b9a42b5d908a3a1",
+        "type": "function",
+        "z": "af688e5.b55d57",
+        "name": "setting switches to defaults",
+        "func": "let temp = {\n        bureau_lichtgestuurd : \"on\",\n        felix_lichtgestuurd : \"off\",\n        felix_ontwaaklicht : \"off\",\n        praktijk_agendagestuurd : \"on\",\n        restart_lights : false\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    //node.warn('switches OK')\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdc7e902b18cec4f",
+        "type": "debug",
+        "z": "af688e5.b55d57",
+        "name": "sun position",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a76d2327be262b28",
+        "type": "tradfri-light-control",
+        "z": "af688e5.b55d57",
+        "gateway": "3a720637.38a402",
+        "name": "Bureau groep",
+        "action": "{}",
+        "accessories": [
+            ""
+        ],
+        "groups": [
+            "131074"
+        ],
+        "x": 340,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3c15aea6.9ea51a",
+        "type": "inject",
+        "z": "eeb0c954.d943d",
+        "name": "ticker",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "*/3 6-22 * * 1,2,3,4,5,6",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "b42b2b12.faf3b"
+            ]
+        ]
+    },
+    {
+        "id": "81f98c70.b0533",
+        "type": "within-time-switch",
+        "z": "eeb0c954.d943d",
+        "name": "praktijk",
+        "positionConfig": "7b789b02.b3d6e4",
+        "startTime": "praktijk.blok_agenda.start",
+        "startTimeType": "global",
+        "startOffset": 0,
+        "startOffsetType": "none",
+        "startOffsetMultiplier": 60000,
+        "endTime": "praktijk.blok_agenda.end",
+        "endTimeType": "global",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 60000,
+        "timeRestrictions": "",
+        "timeRestrictionsType": "none",
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "propertyStart": "",
+        "propertyStartType": "none",
+        "propertyStartCompare": "true",
+        "propertyStartThreshold": "",
+        "propertyStartThresholdType": "num",
+        "startTimeAlt": "",
+        "startTimeAltType": "entered",
+        "startOffsetAlt": 0,
+        "startOffsetAltType": "none",
+        "startOffsetAltMultiplier": 60000,
+        "propertyEnd": "",
+        "propertyEndType": "none",
+        "propertyEndCompare": "true",
+        "propertyEndThreshold": "",
+        "propertyEndThresholdType": "num",
+        "endTimeAlt": "",
+        "endTimeAltType": "entered",
+        "endOffsetAlt": 0,
+        "endOffsetAltType": "none",
+        "endOffsetAltMultiplier": 60000,
+        "tsCompare": "0",
+        "x": 280,
+        "y": 460,
+        "wires": [
+            [
+                "045d670617a3927f"
+            ],
+            [
+                "8e125b71de7e8d9a"
+            ]
+        ]
+    },
+    {
+        "id": "839b7938.f219f8",
+        "type": "switch",
+        "z": "eeb0c954.d943d",
+        "name": "gestuurd?",
+        "property": "switches.praktijk_agendagestuurd",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 280,
+        "y": 160,
+        "wires": [
+            [
+                "ee26048a.733e3"
+            ]
+        ]
+    },
+    {
+        "id": "b42b2b12.faf3b",
+        "type": "switch",
+        "z": "eeb0c954.d943d",
+        "name": "gestuurd?",
+        "property": "switches.praktijk_agendagestuurd",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "8cbf2dda.ec4c88"
+            ]
+        ]
+    },
+    {
+        "id": "e9ecbbb.f2dd548",
+        "type": "inject",
+        "z": "eeb0c954.d943d",
+        "name": "calendar",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "0 6-19 * * 1,2,3,4,5,6",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "839b7938.f219f8"
+            ]
+        ]
+    },
+    {
+        "id": "66c05c69.f1a314",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "next",
+        "func": "let payload =           msg.payload\nlet praktijk =          global.get(\"praktijk\") || {}\nlet blokken_agenda =    praktijk.blokken_agenda || []\nlet blok_agenda =       praktijk.blok_agenda || []\nlet blok_inkom =        praktijk.blok_inkom || {}\n\nlet now = new Date()\nif(payload == 'on' || (payload == \"off\" && blok_agenda.end > now)) return null\n\nlet start =         now.setHours(0,0,0)\nlet end =           new Date(start).setHours(0,1,0)\nlet noBlock = {\n    start:      start,\n    end:        end,\n    startTime:  new Date(start),\n    endTime:    new Date(end)\n}\n\nif(blokken_agenda.length > 0){\n    temp = blokken_agenda.shift()\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_agenda  : blok_agenda,\n        blokken_agenda : blokken_agenda\n        }\n    }\n} else {\n    blok_agenda = noBlock\n    msg = {payload: \"geen blokken\"}\n}\nif(blok_inkom.hasOwnProperty('start')){\n    blok_inkom.startTime =   blok_inkom.start\n    blok_inkom.endTime =     blok_inkom.end\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n} else {\n    blok_inkom = noBlock\n}\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 380,
+        "wires": [
+            [
+                "d47d72d0efa89966"
+            ]
+        ]
+    },
+    {
+        "id": "77b7e9a7.922b6",
+        "type": "ical-upcoming",
+        "z": "eeb0c954.d943d",
+        "confignode": "61506dc1.940954",
+        "checkall": false,
+        "cron": "",
+        "timeout": "",
+        "timeoutUnits": "seconds",
+        "name": "consultaties",
+        "offset": "",
+        "endpreview": "1",
+        "endpreviewUnits": "days",
+        "preview": "1",
+        "previewUnits": "days",
+        "pastview": "1",
+        "pastviewUnits": "days",
+        "trigger": "always",
+        "filter": "",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "12a621d4.d53bae"
+            ]
+        ]
+    },
+    {
+        "id": "12a621d4.d53bae",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "set agenda",
+        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_agenda = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    blok_inkom.start = events[0].eventStart\n    blok_inkom.end   = events[events.length - 1].eventEnd\n\n    eventStart       = events[0].eventStart\n    eventEnd         = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_agenda.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_agenda.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_agenda = blokken_agenda.filter(function(blok){\n        return blok.end > now\n    })\n}\n\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 380,
+        "wires": [
+            [
+                "66c05c69.f1a314"
+            ]
+        ]
+    },
+    {
+        "id": "511165e0.f6f50c",
+        "type": "ical-upcoming",
+        "z": "eeb0c954.d943d",
+        "confignode": "3e48c330.8414ec",
+        "checkall": false,
+        "cron": "",
+        "timeout": "",
+        "timeoutUnits": "seconds",
+        "name": "specials",
+        "offset": "",
+        "endpreview": "1",
+        "endpreviewUnits": "days",
+        "preview": "1",
+        "previewUnits": "days",
+        "pastview": "1",
+        "pastviewUnits": "days",
+        "trigger": "match",
+        "timezone": "",
+        "filterProperty": "summary",
+        "filter2": "",
+        "filter": "oga|raatlamp|rainspotten",
+        "x": 580,
+        "y": 640,
+        "wires": [
+            [
+                "fe44fb82.fb735"
+            ]
+        ]
+    },
+    {
+        "id": "fe44fb82.fb735",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "set specials",
+        "func": "let voorloop = 0\nlet uitloop = 0\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_special = []\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n});\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n\n    eventStart = events[0].eventStart\n    eventEnd   = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_special.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_special.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_special = blokken_special.filter(function(special){\n        return special.end > now\n    })\n}\n\npraktijk.blokken_special = blokken_special\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 640,
+        "wires": [
+            [
+                "6a557c5a.0f20ec"
+            ]
+        ]
+    },
+    {
+        "id": "6a557c5a.0f20ec",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "next",
+        "func": "let payload         = msg.payload\nlet praktijk        = global.get(\"praktijk\") || {}\n\nlet blokken_special = praktijk.blokken_special || []\nlet blok_special    = praktijk.blok_special\n\nlet now = new Date()\nif(payload == 'on' || (payload == 'off' && blok_special.end > now)) return null\n\nif(blokken_special.length > 0){\n    temp = blokken_special.shift()\n\n    blok_special = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_special  :     blok_special,\n        blokken_special :   blokken_special\n        }\n    }\n} else {\n    start =         new Date().setHours(0,0,0)\n    startTime =     new Date(start)\n    end =           new Date(start).setHours(0,1,0)\n    endTime =       new Date(end)\n    blok_special = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    msg = {payload: \"geen speciallekes\"}\n}\n\npraktijk.blokken_special    = blokken_special\npraktijk.blok_special       = blok_special\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 640,
+        "wires": [
+            [
+                "d1568b5c30e7a968"
+            ]
+        ]
+    },
+    {
+        "id": "12b351da.5bf85e",
+        "type": "delay",
+        "z": "eeb0c954.d943d",
+        "name": "delay",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 140,
+        "y": 720,
+        "wires": [
+            [
+                "a03fe1f0.0fa3d"
+            ]
+        ]
+    },
+    {
+        "id": "7810f8e1.33dc3",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set deur, boven",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"relay\":0,\"on\":true}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"relay\": 0,\"on\":false}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "76347eaadd44c2fe",
+                "f169806231b49900"
+            ]
+        ]
+    },
+    {
+        "id": "a03fe1f0.0fa3d",
+        "type": "within-time-switch",
+        "z": "eeb0c954.d943d",
+        "name": "straatlamp",
+        "positionConfig": "7b789b02.b3d6e4",
+        "startTime": "praktijk.blok_special.start",
+        "startTimeType": "global",
+        "startOffset": 0,
+        "startOffsetType": "none",
+        "startOffsetMultiplier": 60000,
+        "endTime": "praktijk.blok_special.end",
+        "endTimeType": "global",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 60000,
+        "timeRestrictions": "",
+        "timeRestrictionsType": "none",
+        "timeDays": "*",
+        "timeOnlyOddDays": true,
+        "timeOnlyEvenDays": true,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "propertyStart": "",
+        "propertyStartType": "none",
+        "propertyStartCompare": "true",
+        "propertyStartThreshold": "",
+        "propertyStartThresholdType": "num",
+        "startTimeAlt": "",
+        "startTimeAltType": "entered",
+        "startOffsetAlt": 0,
+        "startOffsetAltType": "none",
+        "startOffsetAltMultiplier": 60000,
+        "propertyEnd": "",
+        "propertyEndType": "none",
+        "propertyEndCompare": "true",
+        "propertyEndThreshold": "",
+        "propertyEndThresholdType": "num",
+        "endTimeAlt": "",
+        "endTimeAltType": "entered",
+        "endOffsetAlt": 0,
+        "endOffsetAltType": "none",
+        "endOffsetAltMultiplier": 60000,
+        "tsCompare": "0",
+        "x": 290,
+        "y": 720,
+        "wires": [
+            [
+                "85ca14534b786f38"
+            ],
+            [
+                "4d682791da068be5"
+            ]
+        ]
+    },
+    {
+        "id": "960f1791.6227d8",
+        "type": "link out",
+        "z": "eeb0c954.d943d",
+        "name": "agenda uit",
+        "links": [
+            "58f463f9.95ee4c",
+            "f6ad50a3.67911",
+            "36e06774.d6558",
+            "b1a1ce68.513b2"
+        ],
+        "x": 1095,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "959c576d.3ff368",
+        "type": "link out",
+        "z": "eeb0c954.d943d",
+        "name": "special uit",
+        "links": [
+            "36e06774.d6558"
+        ],
+        "x": 1095,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "36e06774.d6558",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "straatlamp in",
+        "links": [
+            "df4778f9.862a9",
+            "959c576d.3ff368",
+            "960f1791.6227d8",
+            "6a8411ce.7eb94",
+            "472d53a0bee192c4"
+        ],
+        "x": 475,
+        "y": 280,
+        "wires": [
+            [
+                "84c468d3.76f4b8"
+            ]
+        ]
+    },
+    {
+        "id": "58f463f9.95ee4c",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "praktijik in",
+        "links": [
+            "960f1791.6227d8",
+            "472d53a0bee192c4"
+        ],
+        "x": 475,
+        "y": 160,
+        "wires": [
+            [
+                "7810f8e1.33dc3",
+                "68c7de62fc4d56a7"
+            ]
+        ]
+    },
+    {
+        "id": "ee26048a.733e3",
+        "type": "link out",
+        "z": "eeb0c954.d943d",
+        "name": "calendar uit",
+        "links": [
+            "950b4130.80c738",
+            "5c31d762.1330f"
+        ],
+        "x": 395,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "950b4130.80c738",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "calendar in",
+        "links": [
+            "4bf8966822ea0cf5",
+            "ee26048a.733e3"
+        ],
+        "x": 395,
+        "y": 380,
+        "wires": [
+            [
+                "77b7e9a7.922b6"
+            ]
+        ]
+    },
+    {
+        "id": "5c31d762.1330f",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "specials in",
+        "links": [
+            "2197d074.c1806",
+            "ee26048a.733e3"
+        ],
+        "x": 395,
+        "y": 640,
+        "wires": [
+            [
+                "511165e0.f6f50c"
+            ]
+        ]
+    },
+    {
+        "id": "8cbf2dda.ec4c88",
+        "type": "link out",
+        "z": "eeb0c954.d943d",
+        "name": "ticker uit",
+        "links": [
+            "27776424.fdf5f4",
+            "fbf9d8cc.3eabb",
+            "682dcf78.60c28",
+            "b4671062.16a35",
+            "6144d9a8.767c38",
+            "69be4cfc.378c14",
+            "e75cb3598c3692d6"
+        ],
+        "x": 395,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "27776424.fdf5f4",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "agenda in",
+        "links": [
+            "8cbf2dda.ec4c88"
+        ],
+        "x": 45,
+        "y": 460,
+        "wires": [
+            [
+                "81f98c70.b0533"
+            ]
+        ]
+    },
+    {
+        "id": "84c468d3.76f4b8",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "set straatlamp",
+        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "79c32f4147ac5745"
+            ]
+        ]
+    },
+    {
+        "id": "fbf9d8cc.3eabb",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "special delay in",
+        "links": [
+            "2197d074.c1806",
+            "8cbf2dda.ec4c88"
+        ],
+        "x": 45,
+        "y": 720,
+        "wires": [
+            [
+                "12b351da.5bf85e"
+            ]
+        ]
+    },
+    {
+        "id": "e121d94a.a91018",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set inkom",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"relay\" : 0,\"on\" : true}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"relay\": 0,\"on\" : false}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 220,
+        "wires": [
+            [
+                "00bd2845c3ba6c13"
+            ]
+        ]
+    },
+    {
+        "id": "fc0d87bf.ee945",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "beneden in",
+        "links": [
+            "1b5162ad.0b52ed"
+        ],
+        "x": 475,
+        "y": 220,
+        "wires": [
+            [
+                "e121d94a.a91018"
+            ]
+        ]
+    },
+    {
+        "id": "4c86ca86.4fb114",
+        "type": "within-time-switch",
+        "z": "eeb0c954.d943d",
+        "name": "inkom",
+        "positionConfig": "7b789b02.b3d6e4",
+        "startTime": "praktijk.blok_inkom.start",
+        "startTimeType": "global",
+        "startOffset": 0,
+        "startOffsetType": "none",
+        "startOffsetMultiplier": 60000,
+        "endTime": "praktijk.blok_inkom.end",
+        "endTimeType": "global",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 60000,
+        "timeRestrictions": "",
+        "timeRestrictionsType": "none",
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "propertyStart": "",
+        "propertyStartType": "none",
+        "propertyStartCompare": "true",
+        "propertyStartThreshold": "",
+        "propertyStartThresholdType": "num",
+        "startTimeAlt": "",
+        "startTimeAltType": "entered",
+        "startOffsetAlt": 0,
+        "startOffsetAltType": "none",
+        "startOffsetAltMultiplier": 60000,
+        "propertyEnd": "",
+        "propertyEndType": "none",
+        "propertyEndCompare": "true",
+        "propertyEndThreshold": "",
+        "propertyEndThresholdType": "num",
+        "endTimeAlt": "",
+        "endTimeAltType": "entered",
+        "endOffsetAlt": 0,
+        "endOffsetAltType": "none",
+        "endOffsetAltMultiplier": 60000,
+        "tsCompare": "0",
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "98f26ade7c11a000"
+            ],
+            [
+                "dd3dde2108dfccc9"
+            ]
+        ]
+    },
+    {
+        "id": "69be4cfc.378c14",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "inkom in",
+        "links": [
+            "8cbf2dda.ec4c88"
+        ],
+        "x": 45,
+        "y": 560,
+        "wires": [
+            [
+                "4c86ca86.4fb114"
+            ]
+        ]
+    },
+    {
+        "id": "1b5162ad.0b52ed",
+        "type": "link out",
+        "z": "eeb0c954.d943d",
+        "name": "inkom uit",
+        "links": [
+            "fc0d87bf.ee945"
+        ],
+        "x": 1095,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "79c32f4147ac5745",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-F3991B.local",
+        "description": "Straatlamp",
+        "pollinginterval": "300000",
+        "x": 970,
+        "y": 280,
+        "wires": [
+            [
+                "ce93c3d714c6b42f"
+            ]
+        ]
+    },
+    {
+        "id": "00bd2845c3ba6c13",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-76ADEB.local",
+        "description": "Beneden",
+        "pollinginterval": "300000",
+        "x": 960,
+        "y": 220,
+        "wires": [
+            [
+                "77f62f7fc178e4a5"
+            ]
+        ]
+    },
+    {
+        "id": "bde0ce574993afcb",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shellyswitch25-76CA13.local",
+        "description": "Boven ",
+        "pollinginterval": "300000",
+        "x": 950,
+        "y": 100,
+        "wires": [
+            [
+                "9afd69f7db153537"
+            ]
+        ]
+    },
+    {
+        "id": "76347eaadd44c2fe",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-F3D414.local",
+        "description": "Deurslot",
+        "pollinginterval": "300000",
+        "x": 960,
+        "y": 160,
+        "wires": [
+            [
+                "cd39465bfd6257c7"
+            ]
+        ]
+    },
+    {
+        "id": "f169806231b49900",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "Switch relay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.relay",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 100,
+        "wires": [
+            [
+                "bde0ce574993afcb"
+            ]
+        ]
+    },
+    {
+        "id": "045d670617a3927f",
+        "type": "rbe",
+        "z": "eeb0c954.d943d",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 750,
+        "y": 460,
+        "wires": [
+            [
+                "960f1791.6227d8"
+            ]
+        ]
+    },
+    {
+        "id": "98f26ade7c11a000",
+        "type": "rbe",
+        "z": "eeb0c954.d943d",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 750,
+        "y": 560,
+        "wires": [
+            [
+                "1b5162ad.0b52ed"
+            ]
+        ]
+    },
+    {
+        "id": "4d682791da068be5",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 740,
+        "wires": [
+            [
+                "85ca14534b786f38"
+            ]
+        ]
+    },
+    {
+        "id": "85ca14534b786f38",
+        "type": "rbe",
+        "z": "eeb0c954.d943d",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 750,
+        "y": 720,
+        "wires": [
+            [
+                "959c576d.3ff368"
+            ]
+        ]
+    },
+    {
+        "id": "dd3dde2108dfccc9",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 580,
+        "wires": [
+            [
+                "98f26ade7c11a000"
+            ]
+        ]
+    },
+    {
+        "id": "77f62f7fc178e4a5",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Beneden",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "cd39465bfd6257c7",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Deurslot",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9afd69f7db153537",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Boven",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[1].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ce93c3d714c6b42f",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Straatlamp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8e125b71de7e8d9a",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "045d670617a3927f"
+            ]
+        ]
+    },
+    {
+        "id": "d47d72d0efa89966",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "consultaties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d1568b5c30e7a968",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "specials",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "332873d8e2eb8576",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Praktijk",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "68c7de62fc4d56a7",
+        "type": "switch",
+        "z": "eeb0c954.d943d",
+        "name": "On",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 40,
+        "wires": [
+            [
+                "2a55e4ed1dd3fb01"
+            ]
+        ]
+    },
+    {
+        "id": "2a55e4ed1dd3fb01",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "set entities",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: true}\n    return msg\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 40,
+        "wires": [
+            [
+                "6f8d93bcc0faf9b6",
+                "332873d8e2eb8576"
+            ]
+        ]
+    },
+    {
+        "id": "6f8d93bcc0faf9b6",
+        "type": "tradfri-light-control",
+        "z": "eeb0c954.d943d",
+        "gateway": "3a720637.38a402",
+        "name": "Praktijk",
+        "action": "{}",
+        "accessories": [],
+        "groups": [],
+        "x": 960,
+        "y": 40,
         "wires": []
     },
     {
@@ -514,7 +2135,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\nlet entities    = []\nlet entitiesRW  = []\nlet entitiesF   = []\nlet entitiesTest= {}\nlet names       = []\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            entitiesRW.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd == 'on'){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           entitiesF.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nentitiesTest = {\n    entitiesRW : entitiesRW,\n    entitiesF : entitiesF\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    msg.entitiesTest = entitiesTest\n    msg.concat = entitiesRW.concat(entitiesF)\n    return msg\n}\n\n",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\nlet entitiesRW  = []\nlet entitiesF   = []\nlet entitiesAll = {}\nlet names       = []\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            entitiesRW.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd == 'on'){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           entitiesF.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nentitiesAll = {\n    entitiesRW : entitiesRW,\n    entitiesF : entitiesF\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    msg.entitiesAll = entitiesAll\n    return msg\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -548,982 +2169,6 @@
         "wires": []
     },
     {
-        "id": "3b2aad13.91b0a2",
-        "type": "comment",
-        "z": "b798ba0e.5afac8",
-        "name": "inkom, straatlamp uit om 23:59",
-        "info": "",
-        "x": 150,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "3019eb30.7e9084",
-        "type": "inject",
-        "z": "b798ba0e.5afac8",
-        "name": "Schakelaar",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "59 23 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"relay\":0,\"on\":false}",
-        "payloadType": "json",
-        "x": 110,
-        "y": 140,
-        "wires": [
-            [
-                "171cf7f2a7932d8a"
-            ]
-        ]
-    },
-    {
-        "id": "fc1658fa.e1f1a8",
-        "type": "inject",
-        "z": "b798ba0e.5afac8",
-        "name": "07:00",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 07 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 100,
-        "y": 320,
-        "wires": [
-            [
-                "a94048ec.49bee8"
-            ]
-        ]
-    },
-    {
-        "id": "f11f1529.85d2a8",
-        "type": "debug",
-        "z": "b798ba0e.5afac8",
-        "name": "Opstaan gedaan?",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 450,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "a94048ec.49bee8",
-        "type": "function",
-        "z": "b798ba0e.5afac8",
-        "name": "data",
-        "func": "let switches            = global.get('switches')\nlet lighting            = global.get('lighting')\nlet lights              = lighting.lights\nlet settings            = lighting.settings\n\nlet brightness          = settings.brightness_min\nlet colorTemperature    = settings.set_min\nlet entities = []\n\nif (switches.ontwaak_felix == 'on') {\n    for (const light in lights) {\n        let temp = lights[light]['name']\n        if (temp.includes('Felix') && (temp.includes('Vloerlamp') || temp.includes('Bedlamp'))) {\n           entities.push(parseInt(light))\n        }\n    }\n}\nmsg = {\n    topic: entities,\n    payload: {\n        data: {\n            colorTemperature: colorTemperature,\n            brightness: brightness,\n            transition: 10\n        }\n    }\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 320,
-        "wires": [
-            [
-                "f11f1529.85d2a8",
-                "8218126c12e4d8a2"
-            ]
-        ]
-    },
-    {
-        "id": "3c15aea6.9ea51a",
-        "type": "inject",
-        "z": "eeb0c954.d943d",
-        "name": "ticker",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "*/3 6-22 * * 1,2,3,4,5,6",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 120,
-        "y": 180,
-        "wires": [
-            [
-                "b42b2b12.faf3b"
-            ]
-        ]
-    },
-    {
-        "id": "81f98c70.b0533",
-        "type": "within-time-switch",
-        "z": "eeb0c954.d943d",
-        "name": "praktijk",
-        "positionConfig": "7b789b02.b3d6e4",
-        "startTime": "praktijk.blok_agenda.start",
-        "startTimeType": "global",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "endTime": "praktijk.blok_agenda.end",
-        "endTimeType": "global",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "timeRestrictions": "",
-        "timeRestrictionsType": "none",
-        "timeDays": "1,2,3,4,5,6",
-        "timeOnlyOddDays": false,
-        "timeOnlyEvenDays": false,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "entered",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "entered",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "tsCompare": "0",
-        "x": 280,
-        "y": 420,
-        "wires": [
-            [
-                "045d670617a3927f"
-            ],
-            [
-                "8e125b71de7e8d9a"
-            ]
-        ]
-    },
-    {
-        "id": "839b7938.f219f8",
-        "type": "switch",
-        "z": "eeb0c954.d943d",
-        "name": "gestuurd?",
-        "property": "switches.praktijk_agendagestuurd",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 280,
-        "y": 120,
-        "wires": [
-            [
-                "ee26048a.733e3"
-            ]
-        ]
-    },
-    {
-        "id": "b42b2b12.faf3b",
-        "type": "switch",
-        "z": "eeb0c954.d943d",
-        "name": "gestuurd?",
-        "property": "switches.praktijk_agendagestuurd",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 280,
-        "y": 180,
-        "wires": [
-            [
-                "8cbf2dda.ec4c88"
-            ]
-        ]
-    },
-    {
-        "id": "e9ecbbb.f2dd548",
-        "type": "inject",
-        "z": "eeb0c954.d943d",
-        "name": "calendar",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "0 6-19 * * 1,2,3,4,5,6",
-        "once": true,
-        "onceDelay": "0.2",
-        "topic": "",
-        "payload": "on",
-        "payloadType": "str",
-        "x": 110,
-        "y": 120,
-        "wires": [
-            [
-                "839b7938.f219f8"
-            ]
-        ]
-    },
-    {
-        "id": "66c05c69.f1a314",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "next",
-        "func": "let payload =           msg.payload\nlet praktijk =          global.get(\"praktijk\") || {}\nlet blokken_agenda =    praktijk.blokken_agenda || []\nlet blok_agenda =       praktijk.blok_agenda || []\nlet blok_inkom =        praktijk.blok_inkom || {}\n\nlet now = new Date()\nif(payload == 'on' || (payload == \"off\" && blok_agenda.end > now)) return null\n\nlet start =         now.setHours(0,0,0)\nlet end =           new Date(start).setHours(0,1,0)\nlet noBlock = {\n    start:      start,\n    end:        end,\n    startTime:  new Date(start),\n    endTime:    new Date(end)\n}\n\nif(blokken_agenda.length > 0){\n    temp = blokken_agenda.shift()\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_agenda  : blok_agenda,\n        blokken_agenda : blokken_agenda\n        }\n    }\n} else {\n    blok_agenda = noBlock\n    msg = {payload: \"geen blokken\"}\n}\nif(blok_inkom.hasOwnProperty('start')){\n    blok_inkom.startTime =   blok_inkom.start\n    blok_inkom.endTime =     blok_inkom.end\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n} else {\n    blok_inkom = noBlock\n}\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 930,
-        "y": 340,
-        "wires": [
-            [
-                "d47d72d0efa89966"
-            ]
-        ]
-    },
-    {
-        "id": "77b7e9a7.922b6",
-        "type": "ical-upcoming",
-        "z": "eeb0c954.d943d",
-        "confignode": "61506dc1.940954",
-        "checkall": false,
-        "cron": "",
-        "timeout": "",
-        "timeoutUnits": "seconds",
-        "name": "consultaties",
-        "offset": "",
-        "endpreview": "1",
-        "endpreviewUnits": "days",
-        "preview": "1",
-        "previewUnits": "days",
-        "pastview": "1",
-        "pastviewUnits": "days",
-        "trigger": "always",
-        "filter": "",
-        "x": 590,
-        "y": 340,
-        "wires": [
-            [
-                "12a621d4.d53bae"
-            ]
-        ]
-    },
-    {
-        "id": "12a621d4.d53bae",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "set agenda",
-        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_agenda = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    blok_inkom.start = events[0].eventStart\n    blok_inkom.end   = events[events.length - 1].eventEnd\n\n    eventStart       = events[0].eventStart\n    eventEnd         = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_agenda.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_agenda.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_agenda = blokken_agenda.filter(function(blok){\n        return blok.end > now\n    })\n}\n\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 770,
-        "y": 340,
-        "wires": [
-            [
-                "66c05c69.f1a314"
-            ]
-        ]
-    },
-    {
-        "id": "511165e0.f6f50c",
-        "type": "ical-upcoming",
-        "z": "eeb0c954.d943d",
-        "confignode": "3e48c330.8414ec",
-        "checkall": false,
-        "cron": "",
-        "timeout": "",
-        "timeoutUnits": "seconds",
-        "name": "specials",
-        "offset": "",
-        "endpreview": "1",
-        "endpreviewUnits": "days",
-        "preview": "1",
-        "previewUnits": "days",
-        "pastview": "1",
-        "pastviewUnits": "days",
-        "trigger": "match",
-        "timezone": "",
-        "filterProperty": "summary",
-        "filter2": "",
-        "filter": "oga|raatlamp|rainspotten",
-        "x": 580,
-        "y": 600,
-        "wires": [
-            [
-                "fe44fb82.fb735"
-            ]
-        ]
-    },
-    {
-        "id": "fe44fb82.fb735",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "set specials",
-        "func": "let voorloop = 0\nlet uitloop = 0\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_special = []\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n});\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n\n    eventStart = events[0].eventStart\n    eventEnd   = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_special.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_special.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_special = blokken_special.filter(function(special){\n        return special.end > now\n    })\n}\n\npraktijk.blokken_special = blokken_special\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 770,
-        "y": 600,
-        "wires": [
-            [
-                "6a557c5a.0f20ec"
-            ]
-        ]
-    },
-    {
-        "id": "6a557c5a.0f20ec",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "next",
-        "func": "let payload         = msg.payload\nlet praktijk        = global.get(\"praktijk\") || {}\n\nlet blokken_special = praktijk.blokken_special || []\nlet blok_special    = praktijk.blok_special\n\nlet now = new Date()\nif(payload == 'on' || (payload == 'off' && blok_special.end > now)) return null\n\nif(blokken_special.length > 0){\n    temp = blokken_special.shift()\n\n    blok_special = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_special  :     blok_special,\n        blokken_special :   blokken_special\n        }\n    }\n} else {\n    start =         new Date().setHours(0,0,0)\n    startTime =     new Date(start)\n    end =           new Date(start).setHours(0,1,0)\n    endTime =       new Date(end)\n    blok_special = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    msg = {payload: \"geen speciallekes\"}\n}\n\npraktijk.blokken_special    = blokken_special\npraktijk.blok_special       = blok_special\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 930,
-        "y": 600,
-        "wires": [
-            [
-                "d1568b5c30e7a968"
-            ]
-        ]
-    },
-    {
-        "id": "12b351da.5bf85e",
-        "type": "delay",
-        "z": "eeb0c954.d943d",
-        "name": "delay",
-        "pauseType": "delay",
-        "timeout": "500",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "x": 140,
-        "y": 680,
-        "wires": [
-            [
-                "a03fe1f0.0fa3d"
-            ]
-        ]
-    },
-    {
-        "id": "7810f8e1.33dc3",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set deur, boven",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "true",
-                "fromt": "bool",
-                "to": "{\"relay\":0,\"on\":true}",
-                "tot": "json"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "false",
-                "fromt": "bool",
-                "to": "{\"relay\": 0,\"on\":false}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 600,
-        "y": 120,
-        "wires": [
-            [
-                "76347eaadd44c2fe",
-                "f169806231b49900"
-            ]
-        ]
-    },
-    {
-        "id": "a03fe1f0.0fa3d",
-        "type": "within-time-switch",
-        "z": "eeb0c954.d943d",
-        "name": "straatlamp",
-        "positionConfig": "7b789b02.b3d6e4",
-        "startTime": "praktijk.blok_special.start",
-        "startTimeType": "global",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "endTime": "praktijk.blok_special.end",
-        "endTimeType": "global",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "timeRestrictions": "",
-        "timeRestrictionsType": "none",
-        "timeDays": "*",
-        "timeOnlyOddDays": true,
-        "timeOnlyEvenDays": true,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "entered",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "entered",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "tsCompare": "0",
-        "x": 290,
-        "y": 680,
-        "wires": [
-            [
-                "85ca14534b786f38"
-            ],
-            [
-                "4d682791da068be5"
-            ]
-        ]
-    },
-    {
-        "id": "960f1791.6227d8",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "agenda uit",
-        "links": [
-            "58f463f9.95ee4c",
-            "f6ad50a3.67911",
-            "36e06774.d6558",
-            "b1a1ce68.513b2"
-        ],
-        "x": 1135,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "959c576d.3ff368",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "special uit",
-        "links": [
-            "36e06774.d6558"
-        ],
-        "x": 1135,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "36e06774.d6558",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "straatlamp in",
-        "links": [
-            "df4778f9.862a9",
-            "959c576d.3ff368",
-            "960f1791.6227d8",
-            "6a8411ce.7eb94"
-        ],
-        "x": 475,
-        "y": 240,
-        "wires": [
-            [
-                "84c468d3.76f4b8"
-            ]
-        ]
-    },
-    {
-        "id": "58f463f9.95ee4c",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "praktijik in",
-        "links": [
-            "960f1791.6227d8"
-        ],
-        "x": 475,
-        "y": 120,
-        "wires": [
-            [
-                "7810f8e1.33dc3"
-            ]
-        ]
-    },
-    {
-        "id": "ee26048a.733e3",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "calendar uit",
-        "links": [
-            "950b4130.80c738",
-            "5c31d762.1330f"
-        ],
-        "x": 395,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "950b4130.80c738",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "calendar in",
-        "links": [
-            "4bf8966822ea0cf5",
-            "ee26048a.733e3"
-        ],
-        "x": 395,
-        "y": 340,
-        "wires": [
-            [
-                "77b7e9a7.922b6"
-            ]
-        ]
-    },
-    {
-        "id": "5c31d762.1330f",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "specials in",
-        "links": [
-            "2197d074.c1806",
-            "ee26048a.733e3"
-        ],
-        "x": 395,
-        "y": 600,
-        "wires": [
-            [
-                "511165e0.f6f50c"
-            ]
-        ]
-    },
-    {
-        "id": "8cbf2dda.ec4c88",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "ticker uit",
-        "links": [
-            "27776424.fdf5f4",
-            "fbf9d8cc.3eabb",
-            "682dcf78.60c28",
-            "b4671062.16a35",
-            "6144d9a8.767c38",
-            "69be4cfc.378c14"
-        ],
-        "x": 395,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "27776424.fdf5f4",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "agenda in",
-        "links": [
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 420,
-        "wires": [
-            [
-                "81f98c70.b0533"
-            ]
-        ]
-    },
-    {
-        "id": "84c468d3.76f4b8",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "set straatlamp",
-        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 600,
-        "y": 240,
-        "wires": [
-            [
-                "79c32f4147ac5745"
-            ]
-        ]
-    },
-    {
-        "id": "fbf9d8cc.3eabb",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "special delay in",
-        "links": [
-            "2197d074.c1806",
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 680,
-        "wires": [
-            [
-                "12b351da.5bf85e"
-            ]
-        ]
-    },
-    {
-        "id": "e121d94a.a91018",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set inkom",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "true",
-                "fromt": "bool",
-                "to": "{\"relay\" : 0,\"on\" : true}",
-                "tot": "json"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "false",
-                "fromt": "bool",
-                "to": "{\"relay\": 0,\"on\" : false}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 180,
-        "wires": [
-            [
-                "00bd2845c3ba6c13"
-            ]
-        ]
-    },
-    {
-        "id": "fc0d87bf.ee945",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "beneden in",
-        "links": [
-            "1b5162ad.0b52ed"
-        ],
-        "x": 475,
-        "y": 180,
-        "wires": [
-            [
-                "e121d94a.a91018"
-            ]
-        ]
-    },
-    {
-        "id": "4c86ca86.4fb114",
-        "type": "within-time-switch",
-        "z": "eeb0c954.d943d",
-        "name": "inkom",
-        "positionConfig": "7b789b02.b3d6e4",
-        "startTime": "praktijk.blok_inkom.start",
-        "startTimeType": "global",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "endTime": "praktijk.blok_inkom.end",
-        "endTimeType": "global",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "timeRestrictions": "",
-        "timeRestrictionsType": "none",
-        "timeDays": "*",
-        "timeOnlyOddDays": false,
-        "timeOnlyEvenDays": false,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "entered",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "entered",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "tsCompare": "0",
-        "x": 270,
-        "y": 520,
-        "wires": [
-            [
-                "98f26ade7c11a000"
-            ],
-            [
-                "dd3dde2108dfccc9"
-            ]
-        ]
-    },
-    {
-        "id": "69be4cfc.378c14",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "inkom in",
-        "links": [
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 520,
-        "wires": [
-            [
-                "4c86ca86.4fb114"
-            ]
-        ]
-    },
-    {
-        "id": "1b5162ad.0b52ed",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "inkom uit",
-        "links": [
-            "fc0d87bf.ee945"
-        ],
-        "x": 1135,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "8c783443.62489",
-        "type": "inject",
-        "z": "af688e5.b55d57",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 01 * * *",
-        "once": false,
-        "onceDelay": "0.5",
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 120,
-        "wires": [
-            [
-                "acc78091.ea4ed"
-            ]
-        ]
-    },
-    {
-        "id": "acc78091.ea4ed",
-        "type": "sun-position",
-        "z": "af688e5.b55d57",
-        "name": "sun %",
-        "positionConfig": "7b789b02.b3d6e4",
-        "rules": [],
-        "onlyOnChange": "true",
-        "topic": "",
-        "outputs": 1,
-        "start": "",
-        "startType": "none",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "end": "",
-        "endType": "none",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "x": 270,
-        "y": 140,
-        "wires": [
-            [
-                "c1cb07db.8f1bf8"
-            ]
-        ]
-    },
-    {
-        "id": "c1cb07db.8f1bf8",
-        "type": "change",
-        "z": "af688e5.b55d57",
-        "name": "set lighting times",
-        "rules": [
-            {
-                "t": "set",
-                "p": "lighting.settings",
-                "pt": "global",
-                "to": "{\"bulb_max\":4000,\"bulb_min\":2200,\"set_max\":3500,\"set_min\":2500,\"brightness_max\":95,\"brightness_min\":65}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "lighting.times.dawn",
-                "pt": "global",
-                "to": "payload.times.nauticalDawn.value",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "lighting.times.sunrise",
-                "pt": "global",
-                "to": "payload.times.sunrise.value",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "lighting.times.sunset",
-                "pt": "global",
-                "to": "payload.times.sunset.value",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "lighting.times.dusk",
-                "pt": "global",
-                "to": "payload.times.nauticalDusk.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 450,
-        "y": 140,
-        "wires": [
-            [
-                "fe9a3513.4fbe68"
-            ]
-        ]
-    },
-    {
-        "id": "fe9a3513.4fbe68",
-        "type": "debug",
-        "z": "af688e5.b55d57",
-        "name": "set lighting",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "8a2d9888.d39c1",
-        "type": "inject",
-        "z": "af688e5.b55d57",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "0.1",
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 180,
-        "wires": [
-            [
-                "acc78091.ea4ed",
-                "2b9a42b5d908a3a1"
-            ]
-        ]
-    },
-    {
         "id": "a09f1f3b66defb01",
         "type": "debug",
         "z": "ef737c5d.8fdfe",
@@ -1541,75 +2186,6 @@
         "wires": []
     },
     {
-        "id": "a76d2327be262b28",
-        "type": "tradfri-light-control",
-        "z": "af688e5.b55d57",
-        "gateway": "3a720637.38a402",
-        "name": "Bureau groep",
-        "action": "{}",
-        "accessories": [
-            ""
-        ],
-        "groups": [
-            "131074",
-            "131074",
-            "131074"
-        ],
-        "x": 340,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "72415e18dc28ead0",
-        "type": "inject",
-        "z": "af688e5.b55d57",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"onOff\":false}",
-        "payloadType": "json",
-        "x": 130,
-        "y": 320,
-        "wires": [
-            [
-                "a76d2327be262b28"
-            ]
-        ]
-    },
-    {
-        "id": "3130e6f150af0d5d",
-        "type": "inject",
-        "z": "af688e5.b55d57",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"onOff\":true}",
-        "payloadType": "json",
-        "x": 130,
-        "y": 280,
-        "wires": [
-            [
-                "a76d2327be262b28"
-            ]
-        ]
-    },
-    {
         "id": "340b392b64f4cd92",
         "type": "comment",
         "z": "ef737c5d.8fdfe",
@@ -1624,8 +2200,8 @@
         "type": "tradfri-monitor",
         "z": "ef737c5d.8fdfe",
         "gateway": "3a720637.38a402",
-        "name": "Tradfri",
-        "x": 90,
+        "name": "Tradfri Rodeweg",
+        "x": 120,
         "y": 100,
         "wires": [
             [
@@ -1638,7 +2214,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "set monitored states",
-        "func": "if (msg.payload.type != 'lightbulb') return\nif(!msg.payload.alive) return {payload: msg.payload.name + ' not alive'}\n\nlet lighting = global.get('lighting')||{}\nif(!lighting.lights) lighting.lights = {}\n\nlet lights = lighting.lights\nlet payload = msg.payload\nlet name = payload.name\nlet isOn = payload.lightbulb.isOn\nlet id = payload.instanceId\n\n\nvar set = false\nif (lights.hasOwnProperty(id)) {\n    if(lights[id]['isOn'] != isOn) {\n        set = true\n    }\n} else {\n    set = true\n}\nif(set) {\n    lighting['lights'][id] = {\n        \"isOn\": isOn,\n        \"name\": name\n    }\n    global.set('lighting', lighting)\n\n    return {\n        payload: name + ' (' + isOn + ')'\n    }\n}\n\n",
+        "func": "if (msg.payload.type != 'lightbulb') return\nif(!msg.payload.alive) return {payload: msg.payload.name + ' not alive'}\n\nlet lighting = global.get('lighting')||{}\nif(!lighting.lights) lighting.lights = {}\nlet lights = lighting.lights\n\nlet payload = msg.payload\nlet name = payload.name\nlet isOn = payload.lightbulb.isOn\nlet id = payload.instanceId\n\nvar set = false\nif (lights.hasOwnProperty(id)) {\n    if(lights[id]['isOn'] != isOn) {\n        set = true\n    }\n} else {\n    set = true\n}\n\nif(set) {\n    lighting['lights'][id] = {\n        \"isOn\": isOn,\n        \"name\": name\n    }\n    global.set('lighting', lighting)\n\n    return {\n        payload: name + ' (' + isOn + ')'\n    }\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1758,64 +2334,58 @@
         ]
     },
     {
-        "id": "aaf325d434fd94f3",
-        "type": "shelly-switch",
-        "z": "8de679a753371272",
-        "hostname": "shelly1-F3991B.local",
-        "description": "Straatlamp",
-        "pollinginterval": "300000",
-        "x": 450,
-        "y": 40,
+        "id": "e8d02cba847d5740",
+        "type": "link in",
+        "z": "ef737c5d.8fdfe",
+        "name": "Lichtsturing",
+        "links": [
+            "66057579505151f3",
+            "8218126c12e4d8a2"
+        ],
+        "x": 175,
+        "y": 360,
         "wires": [
             [
-                "bbae895adf1e9bd1"
+                "7ec5bf43.163b4"
             ]
         ]
     },
     {
-        "id": "f5f6d01a1050d12f",
-        "type": "inject",
-        "z": "8de679a753371272",
-        "name": "on",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"relay\":0,\"on\":true}",
-        "payloadType": "json",
+        "id": "18f48d3f47284108",
+        "type": "tradfri-monitor",
+        "z": "ef737c5d.8fdfe",
+        "gateway": "117d334b145a0072",
+        "name": "Tradfri Felix",
         "x": 110,
-        "y": 40,
+        "y": 160,
         "wires": [
             [
-                "aaf325d434fd94f3",
-                "de73fa271d465d26",
-                "f654bef688a9421d",
-                "5821e7969399d27a"
+                "8d80ed1299f0421c"
             ]
         ]
     },
     {
-        "id": "feafab5a87824869",
+        "id": "3b2aad13.91b0a2",
+        "type": "comment",
+        "z": "b798ba0e.5afac8",
+        "name": "inkom, straatlamp uit om 23:59",
+        "info": "",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3019eb30.7e9084",
         "type": "inject",
-        "z": "8de679a753371272",
-        "name": "off",
+        "z": "b798ba0e.5afac8",
+        "name": "Schakelaar",
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
-        "crontab": "",
+        "crontab": "59 23 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -1825,125 +2395,350 @@
         "y": 100,
         "wires": [
             [
-                "aaf325d434fd94f3",
-                "de73fa271d465d26",
-                "f654bef688a9421d",
-                "5821e7969399d27a"
+                "171cf7f2a7932d8a",
+                "46a54e831354560a"
             ]
         ]
     },
     {
-        "id": "bbae895adf1e9bd1",
+        "id": "fc1658fa.e1f1a8",
+        "type": "inject",
+        "z": "b798ba0e.5afac8",
+        "name": "08:00",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 08 * * 1,2,3,4,5",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 100,
+        "y": 220,
+        "wires": [
+            [
+                "a94048ec.49bee8"
+            ]
+        ]
+    },
+    {
+        "id": "f11f1529.85d2a8",
         "type": "debug",
-        "z": "8de679a753371272",
-        "name": "Straatlamp out",
+        "z": "b798ba0e.5afac8",
+        "name": "Opstaan gedaan?",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload[0].ison",
+        "complete": "payload",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
-        "y": 40,
+        "x": 450,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "de73fa271d465d26",
-        "type": "shelly-switch",
-        "z": "8de679a753371272",
-        "hostname": "shelly1-76ADEB.local",
-        "description": "Beneden",
-        "pollinginterval": "300000",
-        "x": 440,
-        "y": 100,
+        "id": "a94048ec.49bee8",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "name": "data",
+        "func": "let switches            = global.get('switches')\nlet lighting            = global.get('lighting')\nlet lights              = lighting.lights\nlet settings            = lighting.settings\n\nlet brightness          = settings.brightness_min\nlet colorTemperature    = settings.set_min\nlet entities = []\n\nif (switches.felix_ontwaaklicht == 'on') {\n    for (const light in lights) {\n        let temp = lights[light]['name']\n         if (temp.includes('Felix') && temp.includes('lamp')) {\n           entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0) {  \n    newMsg = {\n        'topic' : entities,\n        'payload': {\n            colorTemperature: colorTemperature,\n            brightness: brightness,\n            transition: 10\n            }\n        }\n    return newMsg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 220,
         "wires": [
             [
-                "4dbb1c627a77801f"
+                "f11f1529.85d2a8",
+                "6a6fe1bad5cb96b6"
             ]
         ]
     },
     {
-        "id": "bd83863e51e72a76",
-        "type": "shelly-switch",
-        "z": "8de679a753371272",
-        "hostname": "shellyswitch25-76CA13.local",
-        "description": "Boven ",
-        "pollinginterval": "300000",
+        "id": "171cf7f2a7932d8a",
+        "type": "link out",
+        "z": "b798ba0e.5afac8",
+        "name": "Shelly om 23:59",
+        "links": [
+            "6315b4d8c9634e59"
+        ],
+        "x": 375,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6a6fe1bad5cb96b6",
+        "type": "subflow:7535b2d2.99fc5c",
+        "z": "b798ba0e.5afac8",
+        "name": "",
+        "x": 420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "88041695d73b27b2",
+        "type": "comment",
+        "z": "b798ba0e.5afac8",
+        "name": "felix ontwaken om 07:00 uur",
+        "info": "",
+        "x": 140,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b6fcec1d94b1525f",
+        "type": "tradfri-light-control",
+        "z": "b798ba0e.5afac8",
+        "gateway": "3a720637.38a402",
+        "name": "Praktijk",
+        "action": "{}",
+        "accessories": [
+            ""
+        ],
+        "groups": [
+            ""
+        ],
+        "x": 740,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c02b8097e0b70dfa",
+        "type": "controltimer",
+        "z": "b798ba0e.5afac8",
+        "name": "",
+        "timerType": "delay",
+        "timerDurationUnit": "minute",
+        "timerDurationType": "num",
+        "timerDuration": 10,
+        "timerLoopTimeoutUnit": "second",
+        "timerLoopTimeoutType": "num",
+        "timerLoopTimeout": 0,
+        "loopTimeoutMessageType": "str",
+        "loopTimeoutMessage": "LOOP_TIMEOUT",
+        "timerMaxLoopIterationsType": "num",
+        "timerMaxLoopIterations": 0,
+        "loopMaxIterationsMessageType": "str",
+        "loopMaxIterationsMessage": "MAX_LOOP_ITERATIONS",
+        "isConsecutiveStartActionTimerResetAllowed": true,
+        "isRunningTimerProgressVisible": true,
+        "outputReceivedMessageOnTimerTrigger": true,
+        "outputReceivedMessageOnTimerHalt": true,
+        "startTimerOnReceivalOfUnknownMessage": false,
+        "resetTimerOnReceivalOfUnknownMessage": false,
+        "isDebugModeEnabled": false,
+        "timerTriggeredMessageType": "str",
+        "timerTriggeredMessage": "TIMER_TRIGGERED",
+        "timerHaltedMessageType": "str",
+        "timerHaltedMessage": "TIMER_HALTED",
+        "isStartActionEnabled": true,
+        "isStopActionEnabled": false,
+        "isResetActionEnabled": false,
+        "isPauseActionEnabled": false,
+        "isContinueActionEnabled": false,
+        "actionPropertyNameType": "str",
+        "actionPropertyName": "payload",
+        "startActionNameType": "str",
+        "startActionName": "START",
+        "stopActionNameType": "str",
+        "stopActionName": "STOP",
+        "resetActionNameType": "str",
+        "resetActionName": "RESET",
+        "pauseActionNameType": "str",
+        "pauseActionName": "PAUSE",
+        "continueActionNameType": "str",
+        "continueActionName": "CONTINUE",
+        "x": 560,
+        "y": 500,
+        "wires": [
+            [
+                "f087c13023d174e4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1b760319ddee3c3c",
+        "type": "switch",
+        "z": "b798ba0e.5afac8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "c19a00a015eea7c6",
+                "d5fbba0957479bda"
+            ]
+        ]
+    },
+    {
+        "id": "c19a00a015eea7c6",
+        "type": "change",
+        "z": "b798ba0e.5afac8",
+        "name": "START",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "START",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "c02b8097e0b70dfa"
+            ]
+        ]
+    },
+    {
+        "id": "d5fbba0957479bda",
+        "type": "change",
+        "z": "b798ba0e.5afac8",
+        "name": "onOff: true",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"onOff\" : true}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 420,
+        "wires": [
+            [
+                "ad5444e4b39970ed"
+            ]
+        ]
+    },
+    {
+        "id": "f087c13023d174e4",
+        "type": "change",
+        "z": "b798ba0e.5afac8",
+        "name": "onOff: false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"onOff\" : false}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 500,
+        "wires": [
+            [
+                "ad5444e4b39970ed"
+            ]
+        ]
+    },
+    {
+        "id": "889e5fac89883990",
+        "type": "tradfri-light-control",
+        "z": "b798ba0e.5afac8",
+        "gateway": "3a720637.38a402",
+        "name": "Bureau",
+        "action": "{}",
+        "accessories": [],
+        "groups": [],
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "ad5444e4b39970ed",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "name": "set entities",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau')) {\n            entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    return msg\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "889e5fac89883990"
+            ]
+        ]
+    },
+    {
+        "id": "46a54e831354560a",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "name": "set entities",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: false}\n    return msg\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 430,
-        "y": 160,
+        "y": 80,
         "wires": [
             [
-                "51008eef2dea5055"
+                "b6fcec1d94b1525f"
             ]
         ]
     },
     {
-        "id": "f654bef688a9421d",
-        "type": "shelly-switch",
-        "z": "8de679a753371272",
-        "hostname": "shelly1-F3D414.local",
-        "description": "Deurslot",
-        "pollinginterval": "300000",
-        "x": 440,
-        "y": 220,
+        "id": "c3b58990b5a05f1b",
+        "type": "rpi-gpio in",
+        "z": "b798ba0e.5afac8",
+        "name": "Beweging",
+        "pin": "7",
+        "intype": "tri",
+        "debounce": "25",
+        "read": false,
+        "x": 100,
+        "y": 500,
         "wires": [
             [
-                "1abf4d2442abeb60"
+                "1b760319ddee3c3c"
             ]
         ]
-    },
-    {
-        "id": "4dbb1c627a77801f",
-        "type": "debug",
-        "z": "8de679a753371272",
-        "name": "Beneden out",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "1abf4d2442abeb60",
-        "type": "debug",
-        "z": "8de679a753371272",
-        "name": "Deurslot out",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "51008eef2dea5055",
-        "type": "debug",
-        "z": "8de679a753371272",
-        "name": "Boven 2 out",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[1].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "ab79988be2241e31",
@@ -2065,7 +2860,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
+        "x": 870,
         "y": 400,
         "wires": []
     },
@@ -2323,7 +3118,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "switches.felix_lichtsturing",
+                "p": "switches.felix_lichtgestuurd",
                 "pt": "global",
                 "to": "msg.payload.On ? \"on\" : \"off\"",
                 "tot": "jsonata"
@@ -2384,33 +3179,6 @@
         ]
     },
     {
-        "id": "5821e7969399d27a",
-        "type": "change",
-        "z": "8de679a753371272",
-        "name": "Switch relay",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.relay",
-                "pt": "msg",
-                "to": "1",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 130,
-        "y": 160,
-        "wires": [
-            [
-                "bd83863e51e72a76"
-            ]
-        ]
-    },
-    {
         "id": "e8a055cf20de777b",
         "type": "function",
         "z": "ac61d6b63edc7d80",
@@ -2422,7 +3190,7 @@
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 740,
+        "y": 680,
         "wires": [
             [
                 "ab79988be2241e31"
@@ -2435,40 +3203,6 @@
             ],
             [
                 "f6b0fb33851499cd"
-            ]
-        ]
-    },
-    {
-        "id": "f916c5f4db0a239c",
-        "type": "change",
-        "z": "ac61d6b63edc7d80",
-        "name": "set global",
-        "rules": [
-            {
-                "t": "set",
-                "p": "switches.felix_ontwaak",
-                "pt": "msg",
-                "to": "msg.payload.On ? \"on\" : \"off\"",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "switches",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 620,
-        "y": 420,
-        "wires": [
-            [
-                "df918f0df9bffdd1"
             ]
         ]
     },
@@ -2521,7 +3255,7 @@
         "wires": [
             [],
             [
-                "f916c5f4db0a239c"
+                "bfe5188c7ae49ac3"
             ]
         ]
     },
@@ -2594,166 +3328,10 @@
         "topic": "",
         "payloadType": "date",
         "x": 150,
-        "y": 740,
+        "y": 680,
         "wires": [
             [
                 "e8a055cf20de777b"
-            ]
-        ]
-    },
-    {
-        "id": "9aac430f6643bd61",
-        "type": "suncron",
-        "z": "af688e5.b55d57",
-        "name": "sun test",
-        "lat": "51.3597424",
-        "lon": "4.4833742",
-        "replay": true,
-        "ejectScheduleOnUpdate": false,
-        "sunrisePayload": "day",
-        "sunrisePayloadType": "str",
-        "sunriseTopic": "",
-        "sunriseOffsetType": 1,
-        "sunriseOffsetHours": 0,
-        "sunriseOffsetMinutes": 0,
-        "sunriseOffset": 0,
-        "sunriseEndPayload": "",
-        "sunriseEndPayloadType": "str",
-        "sunriseEndTopic": "",
-        "sunriseEndOffsetType": 1,
-        "sunriseEndOffsetHours": 0,
-        "sunriseEndOffsetMinutes": 0,
-        "sunriseEndOffset": 0,
-        "goldenHourEndPayload": "",
-        "goldenHourEndPayloadType": "str",
-        "goldenHourEndTopic": "",
-        "goldenHourEndOffsetType": 1,
-        "goldenHourEndOffsetHours": 0,
-        "goldenHourEndOffsetMinutes": 0,
-        "goldenHourEndOffset": 0,
-        "solarNoonPayload": "",
-        "solarNoonPayloadType": "str",
-        "solarNoonTopic": "",
-        "solarNoonOffsetType": 1,
-        "solarNoonOffsetHours": 0,
-        "solarNoonOffsetMinutes": 0,
-        "solarNoonOffset": 0,
-        "goldenHourPayload": "",
-        "goldenHourPayloadType": "str",
-        "goldenHourTopic": "",
-        "goldenHourOffsetType": 1,
-        "goldenHourOffsetHours": 0,
-        "goldenHourOffsetMinutes": 0,
-        "goldenHourOffset": 0,
-        "sunsetStartPayload": "",
-        "sunsetStartPayloadType": "str",
-        "sunsetStartTopic": "",
-        "sunsetStartOffsetType": 1,
-        "sunsetStartOffsetHours": 0,
-        "sunsetStartOffsetMinutes": 0,
-        "sunsetStartOffset": 0,
-        "sunsetPayload": "dusk",
-        "sunsetPayloadType": "str",
-        "sunsetTopic": "",
-        "sunsetOffsetType": 1,
-        "sunsetOffsetHours": 0,
-        "sunsetOffsetMinutes": 0,
-        "sunsetOffset": 0,
-        "duskPayload": "",
-        "duskPayloadType": "str",
-        "duskTopic": "",
-        "duskOffsetType": 1,
-        "duskOffsetHours": 0,
-        "duskOffsetMinutes": 0,
-        "duskOffset": 0,
-        "nauticalDuskPayload": "night",
-        "nauticalDuskPayloadType": "str",
-        "nauticalDuskTopic": "",
-        "nauticalDuskOffsetType": 1,
-        "nauticalDuskOffsetHours": 0,
-        "nauticalDuskOffsetMinutes": 0,
-        "nauticalDuskOffset": 0,
-        "nightPayload": "",
-        "nightPayloadType": "str",
-        "nightTopic": "",
-        "nightOffsetType": 1,
-        "nightOffsetHours": 0,
-        "nightOffsetMinutes": 0,
-        "nightOffset": 0,
-        "nadirPayload": "",
-        "nadirPayloadType": "str",
-        "nadirTopic": "",
-        "nadirOffsetType": 1,
-        "nadirOffsetHours": 0,
-        "nadirOffsetMinutes": 0,
-        "nadirOffset": 0,
-        "nightEndPayload": "",
-        "nightEndPayloadType": "str",
-        "nightEndTopic": "",
-        "nightEndOffsetType": 1,
-        "nightEndOffsetHours": 0,
-        "nightEndOffsetMinutes": 0,
-        "nightEndOffset": 0,
-        "nauticalDawnPayload": "dawn",
-        "nauticalDawnPayloadType": "str",
-        "nauticalDawnTopic": "",
-        "nauticalDawnOffsetType": 1,
-        "nauticalDawnOffsetHours": 0,
-        "nauticalDawnOffsetMinutes": 0,
-        "nauticalDawnOffset": 0,
-        "dawnPayload": "",
-        "dawnPayloadType": "str",
-        "dawnTopic": "",
-        "dawnOffsetType": 1,
-        "dawnOffsetHours": 0,
-        "dawnOffsetMinutes": 0,
-        "dawnOffset": 0,
-        "x": 120,
-        "y": 40,
-        "wires": [
-            [
-                "38d971fb1f7b5524"
-            ]
-        ]
-    },
-    {
-        "id": "38d971fb1f7b5524",
-        "type": "change",
-        "z": "af688e5.b55d57",
-        "name": "set global",
-        "rules": [
-            {
-                "t": "set",
-                "p": "switches.sun_position",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload = \"day\" ? \"off\" : \"on\"",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "sun",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 40,
-        "wires": [
-            [
-                "bdc7e902b18cec4f"
             ]
         ]
     },
@@ -2793,23 +3371,6 @@
         "wires": []
     },
     {
-        "id": "e8d02cba847d5740",
-        "type": "link in",
-        "z": "ef737c5d.8fdfe",
-        "name": "Lichtsturing",
-        "links": [
-            "66057579505151f3",
-            "8218126c12e4d8a2"
-        ],
-        "x": 175,
-        "y": 360,
-        "wires": [
-            [
-                "7ec5bf43.163b4"
-            ]
-        ]
-    },
-    {
         "id": "66b9bcdc3b484352",
         "type": "switch",
         "z": "ac61d6b63edc7d80",
@@ -2845,367 +3406,6 @@
         "wires": []
     },
     {
-        "id": "79c32f4147ac5745",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-F3991B.local",
-        "description": "Straatlamp",
-        "pollinginterval": "300000",
-        "x": 970,
-        "y": 240,
-        "wires": [
-            [
-                "ce93c3d714c6b42f"
-            ]
-        ]
-    },
-    {
-        "id": "00bd2845c3ba6c13",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-76ADEB.local",
-        "description": "Beneden",
-        "pollinginterval": "300000",
-        "x": 960,
-        "y": 180,
-        "wires": [
-            [
-                "77f62f7fc178e4a5"
-            ]
-        ]
-    },
-    {
-        "id": "bde0ce574993afcb",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shellyswitch25-76CA13.local",
-        "description": "Boven ",
-        "pollinginterval": "300000",
-        "x": 950,
-        "y": 60,
-        "wires": [
-            [
-                "9afd69f7db153537"
-            ]
-        ]
-    },
-    {
-        "id": "76347eaadd44c2fe",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-F3D414.local",
-        "description": "Deurslot",
-        "pollinginterval": "300000",
-        "x": 960,
-        "y": 120,
-        "wires": [
-            [
-                "cd39465bfd6257c7"
-            ]
-        ]
-    },
-    {
-        "id": "f169806231b49900",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "Switch relay",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.relay",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 790,
-        "y": 60,
-        "wires": [
-            [
-                "bde0ce574993afcb"
-            ]
-        ]
-    },
-    {
-        "id": "171cf7f2a7932d8a",
-        "type": "link out",
-        "z": "b798ba0e.5afac8",
-        "name": "Shelly om 23:59",
-        "links": [
-            "6315b4d8c9634e59"
-        ],
-        "x": 235,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "6315b4d8c9634e59",
-        "type": "link in",
-        "z": "8de679a753371272",
-        "name": "Shelly om 23:59",
-        "links": [
-            "171cf7f2a7932d8a"
-        ],
-        "x": 175,
-        "y": 220,
-        "wires": [
-            [
-                "5821e7969399d27a",
-                "f654bef688a9421d",
-                "de73fa271d465d26",
-                "aaf325d434fd94f3"
-            ]
-        ]
-    },
-    {
-        "id": "045d670617a3927f",
-        "type": "rbe",
-        "z": "eeb0c954.d943d",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 750,
-        "y": 420,
-        "wires": [
-            [
-                "960f1791.6227d8"
-            ]
-        ]
-    },
-    {
-        "id": "98f26ade7c11a000",
-        "type": "rbe",
-        "z": "eeb0c954.d943d",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 750,
-        "y": 520,
-        "wires": [
-            [
-                "1b5162ad.0b52ed"
-            ]
-        ]
-    },
-    {
-        "id": "4d682791da068be5",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set false",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 700,
-        "wires": [
-            [
-                "85ca14534b786f38"
-            ]
-        ]
-    },
-    {
-        "id": "85ca14534b786f38",
-        "type": "rbe",
-        "z": "eeb0c954.d943d",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 750,
-        "y": 680,
-        "wires": [
-            [
-                "959c576d.3ff368"
-            ]
-        ]
-    },
-    {
-        "id": "dd3dde2108dfccc9",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set false",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 540,
-        "wires": [
-            [
-                "98f26ade7c11a000"
-            ]
-        ]
-    },
-    {
-        "id": "77f62f7fc178e4a5",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Beneden",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1140,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "cd39465bfd6257c7",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Deurslot",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1140,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "9afd69f7db153537",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Boven",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[1].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1130,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "ce93c3d714c6b42f",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Straatlamp",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1150,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "8e125b71de7e8d9a",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set false",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 460,
-        "wires": [
-            [
-                "045d670617a3927f"
-            ]
-        ]
-    },
-    {
-        "id": "d47d72d0efa89966",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "consultaties",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1090,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "d1568b5c30e7a968",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "specials",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 600,
-        "wires": []
-    },
-    {
         "id": "df918f0df9bffdd1",
         "type": "rbe",
         "z": "ac61d6b63edc7d80",
@@ -3218,175 +3418,13 @@
         "septopics": false,
         "property": "payload",
         "topi": "topic",
-        "x": 870,
+        "x": 830,
         "y": 340,
         "wires": [
             [
                 "120e953ab7375f77"
             ]
         ]
-    },
-    {
-        "id": "8218126c12e4d8a2",
-        "type": "link out",
-        "z": "b798ba0e.5afac8",
-        "name": "",
-        "links": [
-            "e8d02cba847d5740"
-        ],
-        "x": 375,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "2b9a42b5d908a3a1",
-        "type": "function",
-        "z": "af688e5.b55d57",
-        "name": "setting switches to defaults",
-        "func": "let temp = {\n        bureau_lichtgestuurd : \"on\",\n        felix_lichtgestuurd : \"off\",\n        felix_ontwaaklicht : \"off\",\n        praktijk_agendagestuurd : \"on\",\n        restart_lights : false\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    //node.warn('switches OK')\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 340,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "bdc7e902b18cec4f",
-        "type": "debug",
-        "z": "af688e5.b55d57",
-        "name": "sun position",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "18f48d3f47284108",
-        "type": "tradfri-monitor",
-        "z": "ef737c5d.8fdfe",
-        "gateway": "117d334b145a0072",
-        "name": "Tradfri",
-        "x": 90,
-        "y": 160,
-        "wires": [
-            [
-                "8d80ed1299f0421c"
-            ]
-        ]
-    },
-    {
-        "id": "a0be59d028282e91",
-        "type": "switch",
-        "z": "7535b2d2.99fc5c",
-        "name": "restart_lights",
-        "property": "switches.restart_lights",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 170,
-        "y": 100,
-        "wires": [
-            [
-                "a38e848f.39acd8",
-                "52799f7f7e75939f"
-            ]
-        ]
-    },
-    {
-        "id": "2e1515e95cf7174a",
-        "type": "debug",
-        "z": "7535b2d2.99fc5c",
-        "name": "IKEA restart",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "52799f7f7e75939f",
-        "type": "change",
-        "z": "7535b2d2.99fc5c",
-        "name": "restart false",
-        "rules": [
-            {
-                "t": "set",
-                "p": "switches.restart_lights",
-                "pt": "global",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 350,
-        "y": 100,
-        "wires": [
-            [
-                "2e1515e95cf7174a"
-            ]
-        ]
-    },
-    {
-        "id": "116cea5fcbeeafa1",
-        "type": "debug",
-        "z": "7535b2d2.99fc5c",
-        "name": "Felix color",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 710,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "ab6ebce29c989b3b",
-        "type": "debug",
-        "z": "7535b2d2.99fc5c",
-        "name": "Felix brightness",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 340,
-        "wires": []
     },
     {
         "id": "1dfdf78ca5273b89",
@@ -3412,6 +3450,274 @@
         "wires": [
             [
                 "66057579505151f3"
+            ]
+        ]
+    },
+    {
+        "id": "bfe5188c7ae49ac3",
+        "type": "change",
+        "z": "ac61d6b63edc7d80",
+        "name": "set global",
+        "rules": [
+            {
+                "t": "set",
+                "p": "switches.felix_ontwaaklicht",
+                "pt": "global",
+                "to": "msg.payload.On ? \"on\" : \"off\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "switches",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "df918f0df9bffdd1"
+            ]
+        ]
+    },
+    {
+        "id": "aaf325d434fd94f3",
+        "type": "shelly-switch",
+        "z": "8de679a753371272",
+        "hostname": "shelly1-F3991B.local",
+        "description": "Straatlamp",
+        "pollinginterval": "300000",
+        "x": 450,
+        "y": 40,
+        "wires": [
+            [
+                "bbae895adf1e9bd1"
+            ]
+        ]
+    },
+    {
+        "id": "f5f6d01a1050d12f",
+        "type": "inject",
+        "z": "8de679a753371272",
+        "name": "on",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"relay\":0,\"on\":true}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "aaf325d434fd94f3",
+                "de73fa271d465d26",
+                "f654bef688a9421d",
+                "5821e7969399d27a"
+            ]
+        ]
+    },
+    {
+        "id": "feafab5a87824869",
+        "type": "inject",
+        "z": "8de679a753371272",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"relay\":0,\"on\":false}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "aaf325d434fd94f3",
+                "de73fa271d465d26",
+                "f654bef688a9421d",
+                "5821e7969399d27a"
+            ]
+        ]
+    },
+    {
+        "id": "bbae895adf1e9bd1",
+        "type": "debug",
+        "z": "8de679a753371272",
+        "name": "Straatlamp out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "de73fa271d465d26",
+        "type": "shelly-switch",
+        "z": "8de679a753371272",
+        "hostname": "shelly1-76ADEB.local",
+        "description": "Beneden",
+        "pollinginterval": "300000",
+        "x": 440,
+        "y": 100,
+        "wires": [
+            [
+                "4dbb1c627a77801f"
+            ]
+        ]
+    },
+    {
+        "id": "bd83863e51e72a76",
+        "type": "shelly-switch",
+        "z": "8de679a753371272",
+        "hostname": "shellyswitch25-76CA13.local",
+        "description": "Boven ",
+        "pollinginterval": "300000",
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "51008eef2dea5055"
+            ]
+        ]
+    },
+    {
+        "id": "f654bef688a9421d",
+        "type": "shelly-switch",
+        "z": "8de679a753371272",
+        "hostname": "shelly1-F3D414.local",
+        "description": "Deurslot",
+        "pollinginterval": "300000",
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "1abf4d2442abeb60"
+            ]
+        ]
+    },
+    {
+        "id": "4dbb1c627a77801f",
+        "type": "debug",
+        "z": "8de679a753371272",
+        "name": "Beneden out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1abf4d2442abeb60",
+        "type": "debug",
+        "z": "8de679a753371272",
+        "name": "Deurslot out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "51008eef2dea5055",
+        "type": "debug",
+        "z": "8de679a753371272",
+        "name": "Boven 2 out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[1].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5821e7969399d27a",
+        "type": "change",
+        "z": "8de679a753371272",
+        "name": "Switch relay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.relay",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "bd83863e51e72a76"
+            ]
+        ]
+    },
+    {
+        "id": "6315b4d8c9634e59",
+        "type": "link in",
+        "z": "8de679a753371272",
+        "name": "Shelly om 23:59",
+        "links": [
+            "171cf7f2a7932d8a"
+        ],
+        "x": 175,
+        "y": 220,
+        "wires": [
+            [
+                "5821e7969399d27a",
+                "f654bef688a9421d",
+                "de73fa271d465d26",
+                "aaf325d434fd94f3"
             ]
         ]
     }
