@@ -4,14 +4,16 @@
         "type": "tab",
         "label": "Startup",
         "disabled": false,
-        "info": ""
+        "info": "",
+        "env": []
     },
     {
         "id": "eeb0c954.d943d",
         "type": "tab",
         "label": "Agendasturing",
         "disabled": false,
-        "info": ""
+        "info": "",
+        "env": []
     },
     {
         "id": "ef737c5d.8fdfe",
@@ -25,21 +27,24 @@
         "type": "tab",
         "label": "Regels",
         "disabled": false,
-        "info": ""
+        "info": "",
+        "env": []
     },
     {
         "id": "ac61d6b63edc7d80",
         "type": "tab",
         "label": "Homekit Switches",
         "disabled": false,
-        "info": ""
+        "info": "",
+        "env": []
     },
     {
         "id": "8de679a753371272",
         "type": "tab",
         "label": "Shelly sturing",
         "disabled": false,
-        "info": ""
+        "info": "",
+        "env": []
     },
     {
         "id": "7535b2d2.99fc5c",
@@ -201,6 +206,40 @@
         "y": 359
     },
     {
+        "id": "c6c28fc3c88e18f3",
+        "type": "group",
+        "z": "b798ba0e.5afac8",
+        "name": "oude code consultaties",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "4470c5a21720e20c",
+            "7e4881a932abecf2"
+        ],
+        "x": 994,
+        "y": 39,
+        "w": 352,
+        "h": 82
+    },
+    {
+        "id": "9e6e1d597596576f",
+        "type": "group",
+        "z": "b798ba0e.5afac8",
+        "name": "oude code specials",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7d20fc15db9a8658",
+            "2e2c9b336848af0c"
+        ],
+        "x": 994,
+        "y": 139,
+        "w": 352,
+        "h": 82
+    },
+    {
         "id": "7b789b02.b3d6e4",
         "type": "position-config",
         "name": "sun test config",
@@ -218,10 +257,12 @@
         "type": "ical-config",
         "url": "https://p31-caldav.icloud.com:443/223639751/calendars/351E54A9-85EC-4AD6-A100-0B1435502C5F/",
         "caldav": "icloud",
+        "caltype": "icloud",
         "name": "Marieke",
         "replacedates": false,
         "usecache": false,
         "username": "ahartman2@me.com",
+        "includeTodo": false,
         "password": "pvcv-lgxl-oguf-ckug",
         "calendar": "",
         "pastWeeks": "",
@@ -232,10 +273,12 @@
         "type": "ical-config",
         "url": "https://p31-caldav.icloud.com:443/223639751/calendars/83335524-EB3F-44D7-B6A3-E126D258BD63/",
         "caldav": "icloud",
+        "caltype": "icloud",
         "name": "Speciallekes",
         "replacedates": false,
         "usecache": false,
         "username": "ahartman2@me.com",
+        "includeTodo": false,
         "password": "pvcv-lgxl-oguf-ckug",
         "calendar": "",
         "pastWeeks": "0",
@@ -728,7 +771,7 @@
         "solarNoonOffsetHours": 0,
         "solarNoonOffsetMinutes": 0,
         "solarNoonOffset": 0,
-        "goldenHourPayload": "",
+        "goldenHourPayload": "dusk",
         "goldenHourPayloadType": "str",
         "goldenHourTopic": "",
         "goldenHourOffsetType": 1,
@@ -742,7 +785,7 @@
         "sunsetStartOffsetHours": 0,
         "sunsetStartOffsetMinutes": 0,
         "sunsetStartOffset": 0,
-        "sunsetPayload": "dusk",
+        "sunsetPayload": "",
         "sunsetPayloadType": "str",
         "sunsetTopic": "",
         "sunsetOffsetType": 1,
@@ -913,7 +956,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "*/3 6-22 * * 1,2,3,4,5,6",
+        "crontab": "*/5 6-22 * * 1,2,3,4,5,6",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -971,9 +1014,11 @@
         "endOffsetAlt": 0,
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
+        "withinTimeValueType": "msgInput",
+        "outOfTimeValueType": "msgInput",
         "tsCompare": "0",
-        "x": 280,
-        "y": 460,
+        "x": 680,
+        "y": 220,
         "wires": [
             [
                 "045d670617a3927f"
@@ -1029,7 +1074,9 @@
         "y": 220,
         "wires": [
             [
-                "8cbf2dda.ec4c88"
+                "81f98c70.b0533",
+                "4c86ca86.4fb114",
+                "a03fe1f0.0fa3d"
             ]
         ]
     },
@@ -1059,25 +1106,6 @@
         ]
     },
     {
-        "id": "66c05c69.f1a314",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "next",
-        "func": "let payload =           msg.payload\nlet praktijk =          global.get(\"praktijk\") || {}\nlet blokken_agenda =    praktijk.blokken_agenda || []\nlet blok_agenda =       praktijk.blok_agenda || []\nlet blok_inkom =        praktijk.blok_inkom || {}\n\nlet now = new Date()\nif(payload == 'on' || (payload == \"off\" && blok_agenda.end > now)) return null\n\nlet start =         now.setHours(0,0,0)\nlet end =           new Date(start).setHours(0,1,0)\nlet noBlock = {\n    start:      start,\n    end:        end,\n    startTime:  new Date(start),\n    endTime:    new Date(end)\n}\n\nif(blokken_agenda.length > 0){\n    temp = blokken_agenda.shift()\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_agenda  : blok_agenda,\n        blokken_agenda : blokken_agenda\n        }\n    }\n} else {\n    blok_agenda = noBlock\n    msg = {payload: \"geen blokken\"}\n}\nif(blok_inkom.hasOwnProperty('start')){\n    blok_inkom.startTime =   blok_inkom.start\n    blok_inkom.endTime =     blok_inkom.end\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n} else {\n    blok_inkom = noBlock\n}\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 950,
-        "y": 380,
-        "wires": [
-            [
-                "d47d72d0efa89966"
-            ]
-        ]
-    },
-    {
         "id": "77b7e9a7.922b6",
         "type": "ical-upcoming",
         "z": "eeb0c954.d943d",
@@ -1090,14 +1118,28 @@
         "offset": "",
         "endpreview": "1",
         "endpreviewUnits": "days",
+        "previewtype": "num",
         "preview": "1",
+        "previewUnitstype": "previewUnits",
         "previewUnits": "days",
+        "pastviewtype": "num",
         "pastview": "1",
         "pastviewUnits": "days",
+        "pastviewUnitstype": "pastviewUnits",
+        "triggertype": "trigger",
         "trigger": "always",
+        "timezone": "",
+        "timezonetype": "str",
+        "filterProperty": "summary",
+        "filterPropertytype": "filterProperty",
+        "filterOperator": "between",
+        "filterOperatortype": "filterOperator",
+        "filtertype": "str",
+        "filter2type": "str",
+        "filter2": "",
         "filter": "",
-        "x": 590,
-        "y": 380,
+        "x": 690,
+        "y": 80,
         "wires": [
             [
                 "12a621d4.d53bae"
@@ -1109,17 +1151,17 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set agenda",
-        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_agenda = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    blok_inkom.start = events[0].eventStart\n    blok_inkom.end   = events[events.length - 1].eventEnd\n\n    eventStart       = events[0].eventStart\n    eventEnd         = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_agenda.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_agenda.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_agenda = blokken_agenda.filter(function(blok){\n        return blok.end > now\n    })\n}\n\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    \n    blok_inkom.startTime =   events[0].eventStart\n    blok_inkom.endTime =     events[events.length - 1].eventEnd\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n\n    eventStart = events[0].eventStart\n    eventEnd = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken.push({start: eventStart, end: eventEnd})\n    // take out expired events\n    now = new Date()\n    blokken = blokken.filter(function(blok){\n        return blok.end > now\n    })\n}\n\nlet formatter = Intl.DateTimeFormat('nl-BE', { dateStyle: 'short', timeStyle: 'short' })\nif(blokken.length > 0) {\n    temp = blokken[0]\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  formatter.format(temp.start),\n        endTime:    formatter.format(temp.end)\n    }\n    msg = {payload: praktijk.blok_agenda}\n} else {\n    start =         new Date().setHours(0,0,0)\n    end =           new Date(start).setHours(0,1,0)\n    startTime =     formatter.format(start)\n    endTime =       formatter.format(end)\n    blok_agenda = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    blok_inkom = blok_agenda\n    msg = {payload: \"geen consultaties\"}\n}\n\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn msg\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 380,
+        "x": 870,
+        "y": 80,
         "wires": [
             [
-                "66c05c69.f1a314"
+                "d47d72d0efa89966"
             ]
         ]
     },
@@ -1136,17 +1178,28 @@
         "offset": "",
         "endpreview": "1",
         "endpreviewUnits": "days",
+        "previewtype": "num",
         "preview": "1",
+        "previewUnitstype": "previewUnits",
         "previewUnits": "days",
+        "pastviewtype": "num",
         "pastview": "1",
         "pastviewUnits": "days",
+        "pastviewUnitstype": "pastviewUnits",
+        "triggertype": "trigger",
         "trigger": "match",
         "timezone": "",
+        "timezonetype": "str",
         "filterProperty": "summary",
+        "filterPropertytype": "filterProperty",
+        "filterOperator": "between",
+        "filterOperatortype": "filterOperator",
+        "filtertype": "str",
+        "filter2type": "str",
         "filter2": "",
         "filter": "oga|raatlamp|rainspotten",
-        "x": 580,
-        "y": 640,
+        "x": 680,
+        "y": 140,
         "wires": [
             [
                 "fe44fb82.fb735"
@@ -1158,100 +1211,17 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set specials",
-        "func": "let voorloop = 0\nlet uitloop = 0\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_special = []\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n});\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n\n    eventStart = events[0].eventStart\n    eventEnd   = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_special.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_special.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_special = blokken_special.filter(function(special){\n        return special.end > now\n    })\n}\n\npraktijk.blokken_special = blokken_special\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "func": "let voorloop = 0\nlet uitloop = 0\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken = []\nlet blok_special = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n     // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n\n    eventStart = events[0].eventStart\n    eventEnd   = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken = blokken.filter(function(special){\n        return special.end > now\n    })\n}\n\n    let formatter = new Intl.DateTimeFormat('nl-BE', { dateStyle: 'short', timeStyle: 'short' })\n    if(blokken.length > 0) {\n    temp = blokken[0]\n    blok_special = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  formatter.format(temp.start),\n        endTime:    formatter.format(temp.end)\n    }\n    msg = {payload: blok_special}\n} else {\n    start =         new Date().setHours(0,0,0)\n    startTime =     formatter.format(start)\n    end =           new Date(start).setHours(0,1,0)\n    endTime =      formatter.format(end)\n    blok_special = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    msg = {payload: \"geen speciallekes\"}\n}\npraktijk.blok_special = blok_special\nglobal.set(\"praktijk\", praktijk)\nreturn msg\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 640,
-        "wires": [
-            [
-                "6a557c5a.0f20ec"
-            ]
-        ]
-    },
-    {
-        "id": "6a557c5a.0f20ec",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "next",
-        "func": "let payload         = msg.payload\nlet praktijk        = global.get(\"praktijk\") || {}\n\nlet blokken_special = praktijk.blokken_special || []\nlet blok_special    = praktijk.blok_special\n\nlet now = new Date()\nif(payload == 'on' || (payload == 'off' && blok_special.end > now)) return null\n\nif(blokken_special.length > 0){\n    temp = blokken_special.shift()\n\n    blok_special = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_special  :     blok_special,\n        blokken_special :   blokken_special\n        }\n    }\n} else {\n    start =         new Date().setHours(0,0,0)\n    startTime =     new Date(start)\n    end =           new Date(start).setHours(0,1,0)\n    endTime =       new Date(end)\n    blok_special = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    msg = {payload: \"geen speciallekes\"}\n}\n\npraktijk.blokken_special    = blokken_special\npraktijk.blok_special       = blok_special\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 950,
-        "y": 640,
+        "x": 870,
+        "y": 140,
         "wires": [
             [
                 "d1568b5c30e7a968"
-            ]
-        ]
-    },
-    {
-        "id": "12b351da.5bf85e",
-        "type": "delay",
-        "z": "eeb0c954.d943d",
-        "name": "delay",
-        "pauseType": "delay",
-        "timeout": "500",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 140,
-        "y": 720,
-        "wires": [
-            [
-                "a03fe1f0.0fa3d"
-            ]
-        ]
-    },
-    {
-        "id": "7810f8e1.33dc3",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set deur, boven",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "true",
-                "fromt": "bool",
-                "to": "{\"relay\":0,\"on\":true}",
-                "tot": "json"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "false",
-                "fromt": "bool",
-                "to": "{\"relay\": 0,\"on\":false}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 600,
-        "y": 160,
-        "wires": [
-            [
-                "76347eaadd44c2fe",
-                "f169806231b49900"
             ]
         ]
     },
@@ -1299,9 +1269,11 @@
         "endOffsetAlt": 0,
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
+        "withinTimeValueType": "msgInput",
+        "outOfTimeValueType": "msgInput",
         "tsCompare": "0",
-        "x": 290,
-        "y": 720,
+        "x": 690,
+        "y": 420,
         "wires": [
             [
                 "85ca14534b786f38"
@@ -1320,10 +1292,12 @@
             "58f463f9.95ee4c",
             "f6ad50a3.67911",
             "36e06774.d6558",
-            "b1a1ce68.513b2"
+            "b1a1ce68.513b2",
+            "f3757fdf274d8ea7",
+            "333ed6c45f61e718"
         ],
-        "x": 1095,
-        "y": 460,
+        "x": 1195,
+        "y": 220,
         "wires": []
     },
     {
@@ -1332,49 +1306,12 @@
         "z": "eeb0c954.d943d",
         "name": "special uit",
         "links": [
-            "36e06774.d6558"
+            "36e06774.d6558",
+            "f3757fdf274d8ea7"
         ],
-        "x": 1095,
-        "y": 720,
+        "x": 1195,
+        "y": 420,
         "wires": []
-    },
-    {
-        "id": "36e06774.d6558",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "straatlamp in",
-        "links": [
-            "df4778f9.862a9",
-            "959c576d.3ff368",
-            "960f1791.6227d8",
-            "6a8411ce.7eb94",
-            "472d53a0bee192c4"
-        ],
-        "x": 475,
-        "y": 280,
-        "wires": [
-            [
-                "84c468d3.76f4b8"
-            ]
-        ]
-    },
-    {
-        "id": "58f463f9.95ee4c",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "praktijik in",
-        "links": [
-            "960f1791.6227d8",
-            "472d53a0bee192c4"
-        ],
-        "x": 475,
-        "y": 160,
-        "wires": [
-            [
-                "7810f8e1.33dc3",
-                "68c7de62fc4d56a7"
-            ]
-        ]
     },
     {
         "id": "ee26048a.733e3",
@@ -1398,152 +1335,12 @@
             "4bf8966822ea0cf5",
             "ee26048a.733e3"
         ],
-        "x": 395,
-        "y": 380,
+        "x": 495,
+        "y": 80,
         "wires": [
             [
-                "77b7e9a7.922b6"
-            ]
-        ]
-    },
-    {
-        "id": "5c31d762.1330f",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "specials in",
-        "links": [
-            "2197d074.c1806",
-            "ee26048a.733e3"
-        ],
-        "x": 395,
-        "y": 640,
-        "wires": [
-            [
+                "77b7e9a7.922b6",
                 "511165e0.f6f50c"
-            ]
-        ]
-    },
-    {
-        "id": "8cbf2dda.ec4c88",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "ticker uit",
-        "links": [
-            "27776424.fdf5f4",
-            "fbf9d8cc.3eabb",
-            "682dcf78.60c28",
-            "b4671062.16a35",
-            "6144d9a8.767c38",
-            "69be4cfc.378c14",
-            "e75cb3598c3692d6"
-        ],
-        "x": 395,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "27776424.fdf5f4",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "agenda in",
-        "links": [
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 460,
-        "wires": [
-            [
-                "81f98c70.b0533"
-            ]
-        ]
-    },
-    {
-        "id": "84c468d3.76f4b8",
-        "type": "function",
-        "z": "eeb0c954.d943d",
-        "name": "set straatlamp",
-        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 600,
-        "y": 280,
-        "wires": [
-            [
-                "79c32f4147ac5745"
-            ]
-        ]
-    },
-    {
-        "id": "fbf9d8cc.3eabb",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "special delay in",
-        "links": [
-            "2197d074.c1806",
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 720,
-        "wires": [
-            [
-                "12b351da.5bf85e"
-            ]
-        ]
-    },
-    {
-        "id": "e121d94a.a91018",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "set inkom",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "true",
-                "fromt": "bool",
-                "to": "{\"relay\" : 0,\"on\" : true}",
-                "tot": "json"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "false",
-                "fromt": "bool",
-                "to": "{\"relay\": 0,\"on\" : false}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 220,
-        "wires": [
-            [
-                "00bd2845c3ba6c13"
-            ]
-        ]
-    },
-    {
-        "id": "fc0d87bf.ee945",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "beneden in",
-        "links": [
-            "1b5162ad.0b52ed"
-        ],
-        "x": 475,
-        "y": 220,
-        "wires": [
-            [
-                "e121d94a.a91018"
             ]
         ]
     },
@@ -1592,8 +1389,8 @@
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
         "tsCompare": "0",
-        "x": 270,
-        "y": 560,
+        "x": 670,
+        "y": 320,
         "wires": [
             [
                 "98f26ade7c11a000"
@@ -1604,119 +1401,17 @@
         ]
     },
     {
-        "id": "69be4cfc.378c14",
-        "type": "link in",
-        "z": "eeb0c954.d943d",
-        "name": "inkom in",
-        "links": [
-            "8cbf2dda.ec4c88"
-        ],
-        "x": 45,
-        "y": 560,
-        "wires": [
-            [
-                "4c86ca86.4fb114"
-            ]
-        ]
-    },
-    {
         "id": "1b5162ad.0b52ed",
         "type": "link out",
         "z": "eeb0c954.d943d",
         "name": "inkom uit",
         "links": [
-            "fc0d87bf.ee945"
+            "fc0d87bf.ee945",
+            "64fba6fe8d369fda"
         ],
-        "x": 1095,
-        "y": 560,
+        "x": 1195,
+        "y": 320,
         "wires": []
-    },
-    {
-        "id": "79c32f4147ac5745",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-F3991B.local",
-        "description": "Straatlamp",
-        "pollinginterval": "300000",
-        "x": 970,
-        "y": 280,
-        "wires": [
-            [
-                "ce93c3d714c6b42f"
-            ]
-        ]
-    },
-    {
-        "id": "00bd2845c3ba6c13",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-76ADEB.local",
-        "description": "Beneden",
-        "pollinginterval": "300000",
-        "x": 960,
-        "y": 220,
-        "wires": [
-            [
-                "77f62f7fc178e4a5"
-            ]
-        ]
-    },
-    {
-        "id": "bde0ce574993afcb",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shellyswitch25-76CA13.local",
-        "description": "Boven ",
-        "pollinginterval": "300000",
-        "x": 950,
-        "y": 100,
-        "wires": [
-            [
-                "9afd69f7db153537"
-            ]
-        ]
-    },
-    {
-        "id": "76347eaadd44c2fe",
-        "type": "shelly-switch",
-        "z": "eeb0c954.d943d",
-        "hostname": "shelly1-F3D414.local",
-        "description": "Deurslot",
-        "pollinginterval": "300000",
-        "x": 960,
-        "y": 160,
-        "wires": [
-            [
-                "cd39465bfd6257c7"
-            ]
-        ]
-    },
-    {
-        "id": "f169806231b49900",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "Switch relay",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.relay",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 790,
-        "y": 100,
-        "wires": [
-            [
-                "bde0ce574993afcb"
-            ]
-        ]
     },
     {
         "id": "045d670617a3927f",
@@ -1730,8 +1425,8 @@
         "septopics": false,
         "property": "payload",
         "topi": "topic",
-        "x": 750,
-        "y": 460,
+        "x": 1050,
+        "y": 220,
         "wires": [
             [
                 "960f1791.6227d8"
@@ -1750,8 +1445,8 @@
         "septopics": false,
         "property": "payload",
         "topi": "topic",
-        "x": 750,
-        "y": 560,
+        "x": 1050,
+        "y": 320,
         "wires": [
             [
                 "1b5162ad.0b52ed"
@@ -1777,8 +1472,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 580,
-        "y": 740,
+        "x": 860,
+        "y": 460,
         "wires": [
             [
                 "85ca14534b786f38"
@@ -1797,8 +1492,8 @@
         "septopics": false,
         "property": "payload",
         "topi": "topic",
-        "x": 750,
-        "y": 720,
+        "x": 1050,
+        "y": 420,
         "wires": [
             [
                 "959c576d.3ff368"
@@ -1824,81 +1519,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 580,
-        "y": 580,
+        "x": 860,
+        "y": 360,
         "wires": [
             [
                 "98f26ade7c11a000"
             ]
         ]
-    },
-    {
-        "id": "77f62f7fc178e4a5",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Beneden",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1140,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "cd39465bfd6257c7",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Deurslot",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1140,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "9afd69f7db153537",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Boven",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[1].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1130,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "ce93c3d714c6b42f",
-        "type": "debug",
-        "z": "eeb0c954.d943d",
-        "name": "Straatlamp",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload[0].ison",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1150,
-        "y": 280,
-        "wires": []
     },
     {
         "id": "8e125b71de7e8d9a",
@@ -1919,8 +1546,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 580,
-        "y": 500,
+        "x": 860,
+        "y": 260,
         "wires": [
             [
                 "045d670617a3927f"
@@ -1931,7 +1558,7 @@
         "id": "d47d72d0efa89966",
         "type": "debug",
         "z": "eeb0c954.d943d",
-        "name": "consultaties",
+        "name": "Consultaties",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1940,15 +1567,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1150,
-        "y": 380,
+        "x": 1250,
+        "y": 80,
         "wires": []
     },
     {
         "id": "d1568b5c30e7a968",
         "type": "debug",
         "z": "eeb0c954.d943d",
-        "name": "specials",
+        "name": "Specials",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1957,8 +1584,313 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 640,
+        "x": 1240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "7810f8e1.33dc3",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set deur, boven",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"relay\":0,\"on\":true}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"relay\": 0,\"on\":false}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 660,
+        "wires": [
+            [
+                "76347eaadd44c2fe",
+                "f169806231b49900"
+            ]
+        ]
+    },
+    {
+        "id": "36e06774.d6558",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "straatlamp in",
+        "links": [
+            "df4778f9.862a9",
+            "959c576d.3ff368",
+            "960f1791.6227d8",
+            "6a8411ce.7eb94",
+            "472d53a0bee192c4"
+        ],
+        "x": 575,
+        "y": 780,
+        "wires": [
+            [
+                "84c468d3.76f4b8"
+            ]
+        ]
+    },
+    {
+        "id": "58f463f9.95ee4c",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "praktijik in",
+        "links": [
+            "960f1791.6227d8",
+            "472d53a0bee192c4"
+        ],
+        "x": 575,
+        "y": 660,
+        "wires": [
+            [
+                "7810f8e1.33dc3",
+                "68c7de62fc4d56a7"
+            ]
+        ]
+    },
+    {
+        "id": "84c468d3.76f4b8",
+        "type": "function",
+        "z": "eeb0c954.d943d",
+        "name": "set straatlamp",
+        "func": "let payload =   msg.payload\nlet sun     =   global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 780,
+        "wires": [
+            [
+                "79c32f4147ac5745"
+            ]
+        ]
+    },
+    {
+        "id": "e121d94a.a91018",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "set inkom",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"relay\" : 0,\"on\" : true}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"relay\": 0,\"on\" : false}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 720,
+        "wires": [
+            [
+                "00bd2845c3ba6c13"
+            ]
+        ]
+    },
+    {
+        "id": "fc0d87bf.ee945",
+        "type": "link in",
+        "z": "eeb0c954.d943d",
+        "name": "beneden in",
+        "links": [
+            "1b5162ad.0b52ed"
+        ],
+        "x": 575,
+        "y": 720,
+        "wires": [
+            [
+                "e121d94a.a91018"
+            ]
+        ]
+    },
+    {
+        "id": "79c32f4147ac5745",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-F3991B.local",
+        "description": "Straatlamp",
+        "pollinginterval": "300000",
+        "x": 1070,
+        "y": 780,
+        "wires": [
+            [
+                "ce93c3d714c6b42f"
+            ]
+        ]
+    },
+    {
+        "id": "00bd2845c3ba6c13",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-76ADEB.local",
+        "description": "Beneden",
+        "pollinginterval": "300000",
+        "x": 1060,
+        "y": 720,
+        "wires": [
+            [
+                "77f62f7fc178e4a5"
+            ]
+        ]
+    },
+    {
+        "id": "bde0ce574993afcb",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shellyswitch25-76CA13.local",
+        "description": "Boven ",
+        "pollinginterval": "300000",
+        "x": 1050,
+        "y": 600,
+        "wires": [
+            [
+                "9afd69f7db153537"
+            ]
+        ]
+    },
+    {
+        "id": "76347eaadd44c2fe",
+        "type": "shelly-switch",
+        "z": "eeb0c954.d943d",
+        "hostname": "shelly1-F3D414.local",
+        "description": "Deurslot",
+        "pollinginterval": "300000",
+        "x": 1060,
+        "y": 660,
+        "wires": [
+            [
+                "cd39465bfd6257c7"
+            ]
+        ]
+    },
+    {
+        "id": "f169806231b49900",
+        "type": "change",
+        "z": "eeb0c954.d943d",
+        "name": "switch relay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.relay",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 600,
+        "wires": [
+            [
+                "bde0ce574993afcb"
+            ]
+        ]
+    },
+    {
+        "id": "77f62f7fc178e4a5",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Beneden",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "cd39465bfd6257c7",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Deurslot",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "9afd69f7db153537",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Boven",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[1].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ce93c3d714c6b42f",
+        "type": "debug",
+        "z": "eeb0c954.d943d",
+        "name": "Straatlamp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0].ison",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 780,
         "wires": []
     },
     {
@@ -1974,8 +1906,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 40,
+        "x": 1240,
+        "y": 540,
         "wires": []
     },
     {
@@ -1993,8 +1925,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 570,
-        "y": 40,
+        "x": 670,
+        "y": 540,
         "wires": [
             [
                 "2a55e4ed1dd3fb01"
@@ -2012,12 +1944,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
-        "y": 40,
+        "x": 870,
+        "y": 540,
         "wires": [
             [
-                "6f8d93bcc0faf9b6",
-                "332873d8e2eb8576"
+                "332873d8e2eb8576",
+                "6f8d93bcc0faf9b6"
             ]
         ]
     },
@@ -2030,8 +1962,8 @@
         "action": "{}",
         "accessories": [],
         "groups": [],
-        "x": 960,
-        "y": 40,
+        "x": 1060,
+        "y": 540,
         "wires": []
     },
     {
@@ -2438,7 +2370,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 450,
+        "x": 570,
         "y": 280,
         "wires": []
     },
@@ -2453,7 +2385,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
+        "x": 350,
         "y": 220,
         "wires": [
             [
@@ -2470,7 +2402,7 @@
         "links": [
             "6315b4d8c9634e59"
         ],
-        "x": 375,
+        "x": 315,
         "y": 140,
         "wires": []
     },
@@ -2479,7 +2411,7 @@
         "type": "subflow:7535b2d2.99fc5c",
         "z": "b798ba0e.5afac8",
         "name": "",
-        "x": 420,
+        "x": 540,
         "y": 220,
         "wires": []
     },
@@ -2506,7 +2438,7 @@
         "groups": [
             ""
         ],
-        "x": 740,
+        "x": 540,
         "y": 80,
         "wires": []
     },
@@ -2518,7 +2450,7 @@
         "timerType": "delay",
         "timerDurationUnit": "minute",
         "timerDurationType": "num",
-        "timerDuration": 10,
+        "timerDuration": 15,
         "timerLoopTimeoutUnit": "second",
         "timerLoopTimeoutType": "num",
         "timerLoopTimeout": 0,
@@ -2556,8 +2488,8 @@
         "pauseActionName": "PAUSE",
         "continueActionNameType": "str",
         "continueActionName": "CONTINUE",
-        "x": 560,
-        "y": 500,
+        "x": 580,
+        "y": 620,
         "wires": [
             [
                 "f087c13023d174e4"
@@ -2582,7 +2514,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 250,
+        "x": 270,
         "y": 500,
         "wires": [
             [
@@ -2610,8 +2542,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 390,
-        "y": 500,
+        "x": 410,
+        "y": 620,
         "wires": [
             [
                 "c02b8097e0b70dfa"
@@ -2637,8 +2569,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 420,
+        "x": 570,
+        "y": 500,
         "wires": [
             [
                 "ad5444e4b39970ed"
@@ -2664,8 +2596,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 750,
-        "y": 500,
+        "x": 570,
+        "y": 560,
         "wires": [
             [
                 "ad5444e4b39970ed"
@@ -2681,8 +2613,8 @@
         "action": "{}",
         "accessories": [],
         "groups": [],
-        "x": 740,
-        "y": 420,
+        "x": 920,
+        "y": 500,
         "wires": []
     },
     {
@@ -2696,11 +2628,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 420,
+        "x": 750,
+        "y": 500,
         "wires": [
             [
-                "889e5fac89883990"
+                "889e5fac89883990",
+                "8a91d24af12764d5"
             ]
         ]
     },
@@ -2709,17 +2642,18 @@
         "type": "function",
         "z": "b798ba0e.5afac8",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: false}\n    return msg\n}\n\n",
+        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n    if (entities.length > 0){\n        msg.topic = entities\n        msg.payload = {onOff: false}\n        return msg\n    }\n}\n\n\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
+        "x": 370,
         "y": 80,
         "wires": [
             [
-                "b6fcec1d94b1525f"
+                "b6fcec1d94b1525f",
+                "9dfed8264b67b348"
             ]
         ]
     },
@@ -2728,10 +2662,11 @@
         "type": "rpi-gpio in",
         "z": "b798ba0e.5afac8",
         "name": "Beweging",
-        "pin": "7",
+        "pin": "4",
         "intype": "tri",
         "debounce": "25",
         "read": false,
+        "bcm": true,
         "x": 100,
         "y": 500,
         "wires": [
@@ -2739,6 +2674,112 @@
                 "1b760319ddee3c3c"
             ]
         ]
+    },
+    {
+        "id": "9dfed8264b67b348",
+        "type": "debug",
+        "z": "b798ba0e.5afac8",
+        "name": "Praktijk om middernacht",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4470c5a21720e20c",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "g": "c6c28fc3c88e18f3",
+        "name": "set agenda",
+        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_agenda = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    blok_inkom.start = events[0].eventStart\n    blok_inkom.end   = events[events.length - 1].eventEnd\n\n    eventStart       = events[0].eventStart\n    eventEnd         = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_agenda.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_agenda.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_agenda = blokken_agenda.filter(function(blok){\n        return blok.end > now\n    })\n}\n\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7e4881a932abecf2",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "g": "c6c28fc3c88e18f3",
+        "name": "next",
+        "func": "let payload =           msg.payload\nlet praktijk =          global.get(\"praktijk\") || {}\nlet blokken_agenda =    praktijk.blokken_agenda || []\nlet blok_agenda =       praktijk.blok_agenda || []\nlet blok_inkom =        praktijk.blok_inkom || {}\n\nlet now = new Date()\nif(payload == 'on' || (payload == \"off\" && blok_agenda.end > now)) return null\n\nlet start   =   now.setHours(0,0,0)\nlet end     =   new Date(start).setHours(0,1,0)\nlet noBlock = {\n    start:      start,\n    end:        end,\n    startTime:  new Date(start),\n    endTime:    new Date(end)\n}\n\nif(blokken_agenda.length > 0){\n    temp = blokken_agenda.shift()\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_agenda  : blok_agenda,\n        blokken_agenda : blokken_agenda\n        }\n    }\n} else {\n    blok_agenda = noBlock\n    msg = {payload: \"geen consultaties\"}\n}\nif(blok_inkom.hasOwnProperty('start')){\n    blok_inkom.startTime =   blok_inkom.start\n    blok_inkom.endTime =     blok_inkom.end\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n} else {\n    blok_inkom = noBlock\n}\npraktijk.blokken_agenda = blokken_agenda\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d20fc15db9a8658",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "g": "9e6e1d597596576f",
+        "name": "set specials",
+        "func": "let voorloop = 0\nlet uitloop = 0\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken_special = []\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n});\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n\n    eventStart = events[0].eventStart\n    eventEnd   = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken_special.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken_special.push({start: eventStart, end: eventEnd})\n\n    // take out expired events\n    now = new Date()\n    blokken_special = blokken_special.filter(function(special){\n        return special.end > now\n    })\n}\n\npraktijk.blokken_special = blokken_special\nglobal.set(\"praktijk\", praktijk)\n\nreturn {payload: true}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e2c9b336848af0c",
+        "type": "function",
+        "z": "b798ba0e.5afac8",
+        "g": "9e6e1d597596576f",
+        "name": "next",
+        "func": "let payload         = msg.payload\nlet praktijk        = global.get(\"praktijk\") || {}\n\nlet blokken_special = praktijk.blokken_special || []\nlet blok_special    = praktijk.blok_special\n\nlet now = new Date()\nif(payload == 'on' || (payload == 'off' && blok_special.end > now)) return null\n\nif(blokken_special.length > 0){\n    temp = blokken_special.shift()\n\n    blok_special = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  temp.start,\n        endTime:    temp.end\n    }\n    msg = {payload: {\n        blok_special  :     blok_special,\n        blokken_special :   blokken_special\n        }\n    }\n} else {\n    start =         new Date().setHours(0,0,0)\n    startTime =     new Date(start)\n    end =           new Date(start).setHours(0,1,0)\n    endTime =       new Date(end)\n    blok_special = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    msg = {payload: \"geen speciallekes\"}\n}\n\npraktijk.blokken_special    = blokken_special\npraktijk.blok_special       = blok_special\nglobal.set(\"praktijk\",praktijk)\n\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a91d24af12764d5",
+        "type": "debug",
+        "z": "b798ba0e.5afac8",
+        "name": "Bureau sensor",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 560,
+        "wires": []
     },
     {
         "id": "ab79988be2241e31",
