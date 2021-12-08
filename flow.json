@@ -83,7 +83,9 @@
             "ab79988be2241e31"
         ],
         "x": 254,
-        "y": 59
+        "y": 59,
+        "w": 232,
+        "h": 82
     },
     {
         "id": "a88344fd46a1a258",
@@ -98,7 +100,9 @@
             "200e97d616d139f2"
         ],
         "x": 54,
-        "y": 39
+        "y": 39,
+        "w": 172,
+        "h": 122
     },
     {
         "id": "575b777b8d0ef00f",
@@ -113,7 +117,9 @@
             "df918f0df9bffdd1"
         ],
         "x": 754,
-        "y": 299
+        "y": 299,
+        "w": 252,
+        "h": 142
     },
     {
         "id": "5f38f820d8f596b6",
@@ -128,7 +134,9 @@
             "de23e2e4d966a81d"
         ],
         "x": 54,
-        "y": 199
+        "y": 199,
+        "w": 172,
+        "h": 122
     },
     {
         "id": "000c7f2afbe57624",
@@ -143,7 +151,9 @@
             "011a13273f3a770e"
         ],
         "x": 254,
-        "y": 219
+        "y": 219,
+        "w": 232,
+        "h": 82
     },
     {
         "id": "006589780663fc45",
@@ -158,7 +168,9 @@
             "0de4b20b1f6c9191"
         ],
         "x": 54,
-        "y": 499
+        "y": 499,
+        "w": 172,
+        "h": 122
     },
     {
         "id": "cec0b675c632c86d",
@@ -173,7 +185,9 @@
             "f6b0fb33851499cd"
         ],
         "x": 254,
-        "y": 519
+        "y": 519,
+        "w": 272,
+        "h": 82
     },
     {
         "id": "e6b5b236f3e727ec",
@@ -188,7 +202,9 @@
             "5d3b03dbb4ea9801"
         ],
         "x": 254,
-        "y": 379
+        "y": 379,
+        "w": 232,
+        "h": 82
     },
     {
         "id": "9c9496ec1aad230d",
@@ -203,7 +219,9 @@
             "9a0d28d3bce71307"
         ],
         "x": 54,
-        "y": 359
+        "y": 359,
+        "w": 172,
+        "h": 122
     },
     {
         "id": "c6c28fc3c88e18f3",
@@ -785,7 +803,7 @@
         "sunsetStartOffsetHours": 0,
         "sunsetStartOffsetMinutes": 0,
         "sunsetStartOffset": 0,
-        "sunsetPayload": "",
+        "sunsetPayload": "night",
         "sunsetPayloadType": "str",
         "sunsetTopic": "",
         "sunsetOffsetType": 1,
@@ -799,7 +817,7 @@
         "duskOffsetHours": 0,
         "duskOffsetMinutes": 0,
         "duskOffset": 0,
-        "nauticalDuskPayload": "night",
+        "nauticalDuskPayload": "",
         "nauticalDuskPayloadType": "str",
         "nauticalDuskTopic": "",
         "nauticalDuskOffsetType": 1,
@@ -845,7 +863,8 @@
         "y": 40,
         "wires": [
             [
-                "38d971fb1f7b5524"
+                "38d971fb1f7b5524",
+                "8190e1c8548dcd5d"
             ]
         ]
     },
@@ -942,6 +961,23 @@
         "wires": []
     },
     {
+        "id": "8190e1c8548dcd5d",
+        "type": "debug",
+        "z": "af688e5.b55d57",
+        "name": "sun test",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 80,
+        "wires": []
+    },
+    {
         "id": "3c15aea6.9ea51a",
         "type": "inject",
         "z": "eeb0c954.d943d",
@@ -949,14 +985,10 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
-        "crontab": "*/5 6-22 * * 1,2,3,4,5,6",
+        "crontab": "*/5 7-21 * * 1,2,3,4,5,6",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -991,6 +1023,8 @@
         "timeDays": "*",
         "timeOnlyOddDays": false,
         "timeOnlyEvenDays": false,
+        "timeOnlyOddWeeks": false,
+        "timeOnlyEvenWeeks": false,
         "timeMonths": "*",
         "timedatestart": "",
         "timedateend": "",
@@ -1014,7 +1048,9 @@
         "endOffsetAlt": 0,
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
+        "withinTimeValue": "",
         "withinTimeValueType": "msgInput",
+        "outOfTimeValue": "",
         "outOfTimeValueType": "msgInput",
         "tsCompare": "0",
         "x": 680,
@@ -1046,10 +1082,11 @@
         "repair": false,
         "outputs": 1,
         "x": 280,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
-                "ee26048a.733e3"
+                "77b7e9a7.922b6",
+                "511165e0.f6f50c"
             ]
         ]
     },
@@ -1098,7 +1135,7 @@
         "payload": "on",
         "payloadType": "str",
         "x": 110,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
                 "839b7938.f219f8"
@@ -1151,7 +1188,7 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set agenda",
-        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    \n    blok_inkom.startTime =   events[0].eventStart\n    blok_inkom.endTime =     events[events.length - 1].eventEnd\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n\n    eventStart = events[0].eventStart\n    eventEnd = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken.push({start: eventStart, end: eventEnd})\n    // take out expired events\n    now = new Date()\n    blokken = blokken.filter(function(blok){\n        return blok.end > now\n    })\n}\n\nlet formatter = Intl.DateTimeFormat('nl-BE', { dateStyle: 'short', timeStyle: 'short' })\nif(blokken.length > 0) {\n    temp = blokken[0]\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  formatter.format(temp.start),\n        endTime:    formatter.format(temp.end)\n    }\n    msg = {payload: praktijk.blok_agenda}\n} else {\n    start =         new Date().setHours(0,0,0)\n    end =           new Date(start).setHours(0,1,0)\n    startTime =     formatter.format(start)\n    endTime =       formatter.format(end)\n    blok_agenda = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    blok_inkom = blok_agenda\n    msg = {payload: \"geen consultaties\"}\n}\n\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn msg\n\n",
+        "func": "let voorloop = 30\nlet uitloop = 60\nlet praktijk = global.get(\"praktijk\") || {}\nlet blokken = []\nlet blok_inkom = {}\n\n// get calendar events, take out all-day events\nevents = msg.payload.filter(function(event) {\n    return event.allDay !== true\n})\n\nif (events.length > 0){\n    // take out irrelevant properties\n    events = events.map(({eventStart, eventEnd}) => ({eventStart, eventEnd}))\n    // insert voorloop and uitloop\n    events.forEach(function(item, index) {\n        events[index].eventStart.setMinutes(item.eventStart.getMinutes() - voorloop)\n        events[index].eventEnd.setMinutes(item.eventEnd.getMinutes() + uitloop)\n    });\n    \n    blok_inkom.startTime =   events[0].eventStart\n    blok_inkom.endTime =     events[events.length - 1].eventEnd\n    blok_inkom.start =       new Date(blok_inkom.startTime).getTime()\n    blok_inkom.end =         new Date(blok_inkom.endTime).getTime()\n\n    eventStart = events[0].eventStart\n    eventEnd = events[0].eventEnd\n    events.forEach(function(event) {\n        if (event.eventStart > eventEnd) {\n            blokken.push({start: eventStart, end: eventEnd})\n            eventStart = event.eventStart\n        }\n        eventEnd = event.eventEnd\n    });\n    blokken.push({start: eventStart, end: eventEnd})\n    // take out expired events\n    now = new Date()\n    blokken = blokken.filter(function(blok){\n        return blok.end > now\n    })\n}\n\nlet formatter = Intl.DateTimeFormat('nl-BE', { dateStyle: 'short', timeStyle: 'short' })\nif(blokken.length > 0) {\n    temp = blokken[0]\n    blok_agenda = {\n        start:      new Date(temp.start).getTime(),\n        end:        new Date(temp.end).getTime(),\n        startTime:  formatter.format(temp.start),\n        endTime:    formatter.format(temp.end)\n    }\n    msg = {payload: blok_agenda}\n} else {\n    start =         new Date().setHours(0,0,0)\n    end =           new Date(start).setHours(0,1,0)\n    startTime =     formatter.format(start)\n    endTime =       formatter.format(end)\n    blok_agenda = {\n        start:      start,\n        end:        end,\n        startTime:  startTime,\n        endTime:    endTime\n    }\n    blok_inkom = blok_agenda\n    msg = {payload: \"geen consultaties\"}\n}\n\npraktijk.blok_agenda = blok_agenda\npraktijk.blok_inkom = blok_inkom\nglobal.set(\"praktijk\", praktijk)\n\nreturn msg\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1314,19 +1351,6 @@
         "wires": []
     },
     {
-        "id": "ee26048a.733e3",
-        "type": "link out",
-        "z": "eeb0c954.d943d",
-        "name": "calendar uit",
-        "links": [
-            "950b4130.80c738",
-            "5c31d762.1330f"
-        ],
-        "x": 395,
-        "y": 160,
-        "wires": []
-    },
-    {
         "id": "950b4130.80c738",
         "type": "link in",
         "z": "eeb0c954.d943d",
@@ -1335,12 +1359,11 @@
             "4bf8966822ea0cf5",
             "ee26048a.733e3"
         ],
-        "x": 495,
+        "x": 315,
         "y": 80,
         "wires": [
             [
-                "77b7e9a7.922b6",
-                "511165e0.f6f50c"
+                "77b7e9a7.922b6"
             ]
         ]
     },
@@ -1623,7 +1646,7 @@
         "wires": [
             [
                 "76347eaadd44c2fe",
-                "f169806231b49900"
+                "bde0ce574993afcb"
             ]
         ]
     },
@@ -1799,33 +1822,6 @@
         ]
     },
     {
-        "id": "f169806231b49900",
-        "type": "change",
-        "z": "eeb0c954.d943d",
-        "name": "switch relay",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.relay",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 870,
-        "y": 600,
-        "wires": [
-            [
-                "bde0ce574993afcb"
-            ]
-        ]
-    },
-    {
         "id": "77f62f7fc178e4a5",
         "type": "debug",
         "z": "eeb0c954.d943d",
@@ -1914,7 +1910,7 @@
         "id": "68c7de62fc4d56a7",
         "type": "switch",
         "z": "eeb0c954.d943d",
-        "name": "On",
+        "name": "on",
         "property": "payload",
         "propertyType": "msg",
         "rules": [
@@ -1938,7 +1934,7 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lighting    = global.get('lighting')\nlet lights      = lighting.lights\nlet switches    = global.get('switches')\n\nlet entities    = []\n\n\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: true}\n    return msg\n}\n\n",
+        "func": "let topic       = msg.topic\nlet lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n/*\nlet entities    = []\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n\n    if (entities.length > 0){\n        msg.topic = entities\n        msg.payload = {onOff: true}\n        return msg\n    }\n}\n*/\n\nif(switches.praktijk_agendagestuurd != 'on') return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Bureau'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: true}\n    return msg\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1999,7 +1995,7 @@
         "id": "229c3de4.f3d552",
         "type": "comment",
         "z": "ef737c5d.8fdfe",
-        "name": "Manage lights color temperature and brightness",
+        "name": "Manage lights colour temperature and brightness",
         "info": "",
         "x": 220,
         "y": 220,
@@ -2121,9 +2117,9 @@
         "id": "340b392b64f4cd92",
         "type": "comment",
         "z": "ef737c5d.8fdfe",
-        "name": "IKEA lights",
+        "name": "IKEA lights status",
         "info": "",
-        "x": 100,
+        "x": 120,
         "y": 40,
         "wires": []
     },
@@ -3567,7 +3563,7 @@
                 "aaf325d434fd94f3",
                 "de73fa271d465d26",
                 "f654bef688a9421d",
-                "5821e7969399d27a"
+                "bd83863e51e72a76"
             ]
         ]
     },
@@ -3599,7 +3595,7 @@
                 "aaf325d434fd94f3",
                 "de73fa271d465d26",
                 "f654bef688a9421d",
-                "5821e7969399d27a"
+                "bd83863e51e72a76"
             ]
         ]
     },
@@ -3708,8 +3704,8 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload[1].ison",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
@@ -3717,49 +3713,54 @@
         "wires": []
     },
     {
-        "id": "5821e7969399d27a",
-        "type": "change",
-        "z": "8de679a753371272",
-        "name": "Switch relay",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.relay",
-                "pt": "msg",
-                "to": "1",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 130,
-        "y": 160,
-        "wires": [
-            [
-                "bd83863e51e72a76"
-            ]
-        ]
-    },
-    {
         "id": "6315b4d8c9634e59",
         "type": "link in",
         "z": "8de679a753371272",
         "name": "Shelly om 23:59",
         "links": [
-            "171cf7f2a7932d8a"
+            "171cf7f2a7932d8a",
+            "7eeef5d95105f057"
         ],
         "x": 175,
         "y": 220,
         "wires": [
             [
-                "5821e7969399d27a",
                 "f654bef688a9421d",
                 "de73fa271d465d26",
                 "aaf325d434fd94f3"
             ]
         ]
+    },
+    {
+        "id": "e40216b837cca5ac",
+        "type": "inject",
+        "z": "8de679a753371272",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "7eeef5d95105f057"
+            ]
+        ]
+    },
+    {
+        "id": "7eeef5d95105f057",
+        "type": "link out",
+        "z": "8de679a753371272",
+        "name": "Shelly status",
+        "mode": "link",
+        "links": [
+            "6315b4d8c9634e59"
+        ],
+        "x": 395,
+        "y": 280,
+        "wires": []
     }
 ]
