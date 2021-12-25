@@ -218,9 +218,7 @@
             "7e4881a932abecf2"
         ],
         "x": 994,
-        "y": 39,
-        "w": 352,
-        "h": 82
+        "y": 39
     },
     {
         "id": "9e6e1d597596576f",
@@ -235,9 +233,7 @@
             "2e2c9b336848af0c"
         ],
         "x": 994,
-        "y": 139,
-        "w": 352,
-        "h": 82
+        "y": 139
     },
     {
         "id": "7b789b02.b3d6e4",
@@ -247,42 +243,10 @@
         "longitude": "0",
         "latitude": "0",
         "angleType": "deg",
-        "timeZoneOffset": "99",
-        "timeZoneDST": "0",
+        "timeZoneOffset": 99,
+        "timeZoneDST": 0,
         "stateTimeFormat": "3",
         "stateDateFormat": "12"
-    },
-    {
-        "id": "61506dc1.940954",
-        "type": "ical-config",
-        "url": "https://p31-caldav.icloud.com:443/223639751/calendars/351E54A9-85EC-4AD6-A100-0B1435502C5F/",
-        "caldav": "icloud",
-        "caltype": "icloud",
-        "name": "Marieke",
-        "replacedates": false,
-        "usecache": false,
-        "username": "ahartman2@me.com",
-        "includeTodo": false,
-        "password": "pvcv-lgxl-oguf-ckug",
-        "calendar": "",
-        "pastWeeks": "",
-        "futureWeeks": ""
-    },
-    {
-        "id": "3e48c330.8414ec",
-        "type": "ical-config",
-        "url": "https://p31-caldav.icloud.com:443/223639751/calendars/83335524-EB3F-44D7-B6A3-E126D258BD63/",
-        "caldav": "icloud",
-        "caltype": "icloud",
-        "name": "Speciallekes",
-        "replacedates": false,
-        "usecache": false,
-        "username": "ahartman2@me.com",
-        "includeTodo": false,
-        "password": "pvcv-lgxl-oguf-ckug",
-        "calendar": "",
-        "pastWeeks": "0",
-        "futureWeeks": "4"
     },
     {
         "id": "3a720637.38a402",
@@ -322,6 +286,38 @@
         "gatewayHost": "TRADFRI-Gateway-b8d7af2bba3b.local",
         "identity": "tradfri_1633693847406",
         "preSharedKey": "Es001M9i5JjnxGZm"
+    },
+    {
+        "id": "457e5cc2c499382a",
+        "type": "ical-config",
+        "url": "https://p31-caldav.icloud.com:443/223639751/calendars/351E54A9-85EC-4AD6-A100-0B1435502C5F/",
+        "caldav": "",
+        "caltype": "icloud",
+        "name": "consultaties",
+        "replacedates": false,
+        "usecache": false,
+        "username": "",
+        "includeTodo": false,
+        "password": "",
+        "calendar": "",
+        "pastWeeks": "0",
+        "futureWeeks": "4"
+    },
+    {
+        "id": "42314efd8435e3b0",
+        "type": "ical-config",
+        "url": "https://p31-caldav.icloud.com:443/223639751/calendars/83335524-EB3F-44D7-B6A3-E126D258BD63/",
+        "caldav": "",
+        "caltype": "icloud",
+        "name": "speciallekes",
+        "replacedates": false,
+        "usecache": false,
+        "username": "",
+        "includeTodo": false,
+        "password": "",
+        "calendar": "",
+        "pastWeeks": "0",
+        "futureWeeks": "4"
     },
     {
         "id": "fd5b71cd.f759d",
@@ -367,12 +363,8 @@
             [
                 "994c6b54.5d27c8"
             ],
-            [
-                "e99f9c4f90b30509"
-            ],
-            [
-                "70e5b7b5463b48c2"
-            ]
+            [],
+            []
         ]
     },
     {
@@ -417,27 +409,9 @@
         "y": 180,
         "wires": [
             [
-                "a38e848f.39acd8",
-                "1d763a5420a3fb9c"
+                "a38e848f.39acd8"
             ]
         ]
-    },
-    {
-        "id": "1d763a5420a3fb9c",
-        "type": "debug",
-        "z": "7535b2d2.99fc5c",
-        "name": "IKEA lichten",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 350,
-        "y": 260,
-        "wires": []
     },
     {
         "id": "a0be59d028282e91",
@@ -729,7 +703,7 @@
         "y": 320,
         "wires": [
             [
-                "a76d2327be262b28"
+                "380228a5c9d8cfb0"
             ]
         ]
     },
@@ -754,7 +728,7 @@
         "y": 280,
         "wires": [
             [
-                "a76d2327be262b28"
+                "380228a5c9d8cfb0"
             ]
         ]
     },
@@ -795,28 +769,28 @@
         "solarNoonOffsetHours": 0,
         "solarNoonOffsetMinutes": 0,
         "solarNoonOffset": 0,
-        "goldenHourPayload": "dusk",
+        "goldenHourPayload": "",
         "goldenHourPayloadType": "str",
         "goldenHourTopic": "",
         "goldenHourOffsetType": 1,
         "goldenHourOffsetHours": 0,
         "goldenHourOffsetMinutes": 0,
         "goldenHourOffset": 0,
-        "sunsetStartPayload": "",
+        "sunsetStartPayload": "dusk",
         "sunsetStartPayloadType": "str",
         "sunsetStartTopic": "",
         "sunsetStartOffsetType": 1,
         "sunsetStartOffsetHours": 0,
         "sunsetStartOffsetMinutes": 0,
         "sunsetStartOffset": 0,
-        "sunsetPayload": "night",
+        "sunsetPayload": "",
         "sunsetPayloadType": "str",
         "sunsetTopic": "",
         "sunsetOffsetType": 1,
         "sunsetOffsetHours": 0,
         "sunsetOffsetMinutes": 0,
         "sunsetOffset": 0,
-        "duskPayload": "",
+        "duskPayload": "night",
         "duskPayloadType": "str",
         "duskTopic": "",
         "duskOffsetType": 1,
@@ -888,17 +862,17 @@
             },
             {
                 "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload = \"day\" ? \"off\" : \"on\"",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
                 "p": "topic",
                 "pt": "msg",
                 "to": "sun",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload = \"day\" or payload = \"dusk\" ? false : true",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -910,7 +884,8 @@
         "y": 40,
         "wires": [
             [
-                "bdc7e902b18cec4f"
+                "bdc7e902b18cec4f",
+                "d0523348203eaa10"
             ]
         ]
     },
@@ -919,13 +894,13 @@
         "type": "function",
         "z": "af688e5.b55d57",
         "name": "setting switches to defaults",
-        "func": "let temp = {\n        bureau_lichtgestuurd : \"on\",\n        felix_lichtgestuurd : \"off\",\n        felix_ontwaaklicht : \"off\",\n        praktijk_agendagestuurd : \"on\",\n        restart_lights : false\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    //node.warn('switches OK')\n}",
+        "func": "let temp = {\n    bureau_lichtgestuurd : true,\n    felix_lichtgestuurd : false,\n    felix_ontwaaklicht : false,\n    praktijk_agendagestuurd : true,\n    restart_lights : false\n} \n\nlet switches = global.get(\"switches\")\nif (switches ===  undefined) {\n    node.warn('setting switches to defaults')\n    let switches = temp\n    global.set('switches', switches)\n} else {\n    //node.warn('switches OK')\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
+        "x": 480,
         "y": 200,
         "wires": [
             []
@@ -961,9 +936,41 @@
         "groups": [
             "131074"
         ],
-        "x": 520,
-        "y": 320,
+        "x": 660,
+        "y": 300,
         "wires": []
+    },
+    {
+        "id": "d0523348203eaa10",
+        "type": "link out",
+        "z": "af688e5.b55d57",
+        "name": "Sun test out",
+        "mode": "link",
+        "links": [
+            "36e06774.d6558"
+        ],
+        "x": 595,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "380228a5c9d8cfb0",
+        "type": "function",
+        "z": "af688e5.b55d57",
+        "name": "set entities",
+        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Bureau'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    //msg.payload = {onOff: true}\n    return msg\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "a76d2327be262b28"
+            ]
+        ]
     },
     {
         "id": "3c15aea6.9ea51a",
@@ -976,9 +983,9 @@
             }
         ],
         "repeat": "",
-        "crontab": "*/5 7-21 * * 1,2,3,4,5,6",
-        "once": false,
-        "onceDelay": 0.1,
+        "crontab": "*/5 6-21 * * 1,2,3,4,5,6",
+        "once": true,
+        "onceDelay": "2",
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
@@ -1061,9 +1068,7 @@
         "propertyType": "global",
         "rules": [
             {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
+                "t": "true"
             }
         ],
         "checkall": "true",
@@ -1087,9 +1092,7 @@
         "propertyType": "global",
         "rules": [
             {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
+                "t": "true"
             }
         ],
         "checkall": "true",
@@ -1118,7 +1121,7 @@
         "repeat": "",
         "crontab": "0 6-19 * * 1,2,3,4,5,6",
         "once": true,
-        "onceDelay": "0.2",
+        "onceDelay": "1",
         "topic": "",
         "payload": "on",
         "payloadType": "str",
@@ -1134,7 +1137,7 @@
         "id": "77b7e9a7.922b6",
         "type": "ical-upcoming",
         "z": "eeb0c954.d943d",
-        "confignode": "61506dc1.940954",
+        "confignode": "457e5cc2c499382a",
         "checkall": false,
         "cron": "",
         "timeout": "",
@@ -1194,7 +1197,7 @@
         "id": "511165e0.f6f50c",
         "type": "ical-upcoming",
         "z": "eeb0c954.d943d",
-        "confignode": "3e48c330.8414ec",
+        "confignode": "42314efd8435e3b0",
         "checkall": false,
         "cron": "",
         "timeout": "",
@@ -1644,18 +1647,15 @@
         "z": "eeb0c954.d943d",
         "name": "straatlamp in",
         "links": [
-            "df4778f9.862a9",
             "959c576d.3ff368",
             "960f1791.6227d8",
-            "6a8411ce.7eb94",
-            "472d53a0bee192c4"
+            "d0523348203eaa10"
         ],
         "x": 575,
         "y": 780,
         "wires": [
             [
-                "84c468d3.76f4b8",
-                "98b27ad78bd8ab40"
+                "84c468d3.76f4b8"
             ]
         ]
     },
@@ -1682,7 +1682,7 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set straatlamp",
-        "func": "let payload = msg.payload\nlet sun = global.get(\"switches.sun_position\")\n\nif ((sun != \"day\" && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
+        "func": "let payload = msg.payload\nlet sun = global.get(\"switches.sun_position\")\nlet blok = global.get(\"praktijk.blok_agenda\")\n\nlet now = new Date()\nlet active = (now > blok.start && now < blok.end) ? true : false\n\nnode.warn(\"sun: \" + sun)\nnode.warn(\"active: \" + active)\nnode.warn(\"payload: \" + payload)\nif ((sun != \"day\" && active && payload) || !payload)\n    {\n        newMsg = {\"payload\" : {\n            \"relay\": 0,\n            \"on\" : payload\n        }\n    }\n    return newMsg\n} ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1914,7 +1914,8 @@
         "y": 540,
         "wires": [
             [
-                "2a55e4ed1dd3fb01"
+                "2a55e4ed1dd3fb01",
+                "e78e1db12eb606e0"
             ]
         ]
     },
@@ -1923,7 +1924,7 @@
         "type": "function",
         "z": "eeb0c954.d943d",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n/*\nlet entities    = []\nif(switches.praktijk_agendagestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Praktijk')) {\n            entities.push(parseInt(light))\n        }\n    }\n\n    if (entities.length > 0){\n        msg.topic = entities\n        msg.payload = {onOff: true}\n        return msg\n    }\n}\n*/\n\nif(switches.praktijk_agendagestuurd != 'on') return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Praktijk'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: true}\n    return msg\n}\n\n\n",
+        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nif(!switches.praktijk_agendagestuurd) return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Praktijk'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: true}\n    return msg\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1934,7 +1935,8 @@
         "wires": [
             [
                 "332873d8e2eb8576",
-                "6f8d93bcc0faf9b6"
+                "6f8d93bcc0faf9b6",
+                "e78e1db12eb606e0"
             ]
         ]
     },
@@ -1954,20 +1956,44 @@
         "wires": []
     },
     {
-        "id": "98b27ad78bd8ab40",
+        "id": "44bb3a85cd825e38",
+        "type": "inject",
+        "z": "eeb0c954.d943d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 380,
+        "y": 540,
+        "wires": [
+            [
+                "68c7de62fc4d56a7"
+            ]
+        ]
+    },
+    {
+        "id": "e78e1db12eb606e0",
         "type": "debug",
         "z": "eeb0c954.d943d",
-        "name": "set straatlamp",
+        "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 700,
-        "y": 820,
+        "x": 1070,
+        "y": 480,
         "wires": []
     },
     {
@@ -1975,7 +2001,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "calc",
-        "func": "let lighting    = global.get('lighting')\nlet settings    = lighting.settings\nlet times       = lighting.times\nlet switches    = global.get('switches')\nlet sun         = switches.sun_position\nlet sun_percent = msg.payload.altitudePercent/100\nlet dateNow     = Date.now()\n\nif (sun == 'day'){\n    colorTemperature = (settings.set_max-settings.set_min) * sun_percent + settings.set_min\n    brightness = settings.brightness_max\n} else if (sun == 'night'){\n    colorTemperature = settings.set_min\n    brightness = settings.brightness_min\n} else {\n    if(sun == 'dawn'){\n        periodDuration = times.sunrise - times.dawn\n        periodActual = dateNow - times.dawn\n    } else if (sun == 'dusk') {\n        periodDuration = times.dusk - times.sunset\n        periodActual = times.dusk - dateNow\n    } else {\n        node.error({payload: 'problem in Calc', sun : sun})\n    }\n    brightness = (settings.brightness_max - settings.brightness_min) * periodActual/periodDuration + settings.brightness_min\n    colorTemperature = settings.set_min\n}\ncolorTemperature = 100 - (100 * (colorTemperature - settings.bulb_min)/(settings.bulb_max - settings.bulb_min))\n\nnewMsg = {\n    'payload': {\n        'colorTemperature': parseInt(colorTemperature.toFixed(0)),\n        'brightness': parseInt(brightness.toFixed(0))\n        }\n    }\nreturn newMsg;",
+        "func": "let lighting    = global.get('lighting')\nlet settings    = lighting.settings\nlet times       = lighting.times\nlet sun         = global.get('switches.sun_position')\nlet sun_percent = msg.payload.altitudePercent/100\nlet dateNow     = Date.now()\n\nif (sun == 'day'){\n    colorTemperature = (settings.set_max-settings.set_min) * sun_percent + settings.set_min\n    brightness = settings.brightness_max\n} else if (sun == 'night'){\n    colorTemperature = settings.set_min\n    brightness = settings.brightness_min\n} else {\n    if(sun == 'dawn'){\n        periodDuration = times.sunrise - times.dawn\n        periodActual = dateNow - times.dawn\n    } else if (sun == 'dusk') {\n        periodDuration = times.dusk - times.sunset\n        periodActual = times.dusk - dateNow\n    } else {\n        node.error({payload: 'problem in Calc', sun : sun})\n    }\n    brightness = (settings.brightness_max - settings.brightness_min) * periodActual/periodDuration + settings.brightness_min\n    colorTemperature = settings.set_min\n}\ncolorTemperature = 100 - (100 * (colorTemperature - settings.bulb_min)/(settings.bulb_max - settings.bulb_min))\n\nnewMsg = {\n    'payload': {\n        'colorTemperature': parseInt(colorTemperature.toFixed(0)),\n        'brightness': parseInt(brightness.toFixed(0))\n        }\n    }\nreturn newMsg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2071,7 +2097,7 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "set entities",
-        "func": "let topic       = msg.topic\nlet lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nlet entities    = []\nlet entitiesRW  = []\nlet entitiesF   = []\nlet entitiesAll = {}\nlet names       = []\n\nif(switches.bureau_lichtgestuurd == 'on') {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            entitiesRW.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd == 'on'){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           entitiesF.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nentitiesAll = {\n    entitiesRW : entitiesRW,\n    entitiesF : entitiesF\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    msg.entitiesAll = entitiesAll\n    return msg\n}\n\n",
+        "func": "let topic       = msg.topic\nlet lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nlet entities    = []\nlet entitiesRW  = []\nlet entitiesF   = []\nlet entitiesAll = {}\nlet names       = []\n\nif(switches.bureau_lichtgestuurd) {\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Bureau') && lights[light]['isOn']) {\n            entities.push(parseInt(light))\n            entitiesRW.push(parseInt(light))\n            names.push(lights[light]['name'])\n        }\n    }\n}\n\nif(switches.felix_lichtgestuurd){\n    for (const light in lights) {\n        if (lights[light]['name'].includes('Felix') && lights[light]['isOn']) {\n           entities.push(parseInt(light))\n           entitiesF.push(parseInt(light))\n           names.push(lights[light]['name'])\n        }\n    }\n}\n\nentitiesAll = {\n    entitiesRW : entitiesRW,\n    entitiesF : entitiesF\n}\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.names = names\n    msg.entitiesAll = entitiesAll\n    return msg\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2092,7 +2118,7 @@
         "type": "debug",
         "z": "ef737c5d.8fdfe",
         "name": "entities payload",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2150,14 +2176,14 @@
         "type": "function",
         "z": "ef737c5d.8fdfe",
         "name": "set monitored states",
-        "func": "if (msg.payload.type != 'lightbulb') return\nif(!msg.payload.alive) return {payload: msg.payload.name + ' not alive'}\n\nlet lighting = global.get('lighting')||{}\nif(!lighting.lights) lighting.lights = {}\nlet lights = lighting.lights\n\n//let payload = msg.payload\nlet name = msg.payload.name\nlet isOn = msg.payload.lightbulb.isOn\nlet id = msg.payload.instanceId\n\nvar set = false\nif (lights.hasOwnProperty(id)) {\n    if(lights[id]['isOn'] != isOn) {\n        set = true\n    }\n} else {\n    set = true\n}\n\nif(set) {\n    lighting['lights'][id] = {\n        \"isOn\": isOn,\n        \"name\": name\n    }\n    global.set('lighting', lighting)\n\n    return {\n        payload: name + ' (' + isOn + ')'\n    }\n}\n\n",
+        "func": "if (msg.payload.type != 'lightbulb') return\nif(!msg.payload.alive) return {\n    payload: msg.payload.name + ' not alive'\n}\n\nlet lighting = global.get('lighting')||{}\nif(!lighting.lights) lighting.lights = {}\nlet lights = lighting.lights\n\nlet name = msg.payload.name\nlet isOn = msg.payload.lightbulb.isOn\nlet id = msg.payload.instanceId\n\nvar set = false\nif (lights.hasOwnProperty(id)) {\n    if(lights[id]['isOn'] != isOn) {\n        set = true\n    }\n} else {\n    set = true\n}\n\nif(set) {\n    lighting['lights'][id] = {\n        \"isOn\": isOn,\n        \"name\": name\n    }\n    global.set('lighting', lighting)\n\n    return {\n        payload: name + ' (' + isOn + ')'\n    }\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 100,
+        "y": 120,
         "wires": [
             [
                 "9004f0597913e647",
@@ -2383,7 +2409,7 @@
         "type": "function",
         "z": "b798ba0e.5afac8",
         "name": "data",
-        "func": "let switches            = global.get('switches')\nlet lights              = global.get('lighting.lights')\nlet brightness          = global.get('lighting.settings.brightness_min')\nlet colorTemperature    = globa.get('lighting.settings.set_min')\nlet entities = []\n\nif (switches.felix_ontwaaklicht == 'on') {\n    for (const light in lights) {\n        let temp = lights[light]['name']\n         if (temp.includes('Felix') && temp.includes('lamp')) {\n           entities.push(parseInt(light))\n        }\n    }\n}\n\nif (entities.length > 0) {  \n    newMsg = {\n        'topic' : entities,\n        'payload': {\n            colorTemperature: colorTemperature,\n            brightness: brightness,\n            transition: 10\n            }\n        }\n    return newMsg\n}\n",
+        "func": "let switches            = global.get('switches')\nlet lights              = global.get('lighting.lights')\nlet brightness          = global.get('lighting.settings.brightness_min')\nlet colorTemperature    = global.get('lighting.settings.set_min')\nlet entities = []\n\nif (!switches.felix_ontwaaklicht) return\n\nfor (const light in lights) {\n    let temp = lights[light]['name']\n    if (temp.includes('Felix') && temp.includes('lamp')) {\n         entities.push(parseInt(light))\n    }\n}\n\nif (entities.length > 0) {  \n    newMsg = {\n        'topic' : entities,\n        'payload': {\n            colorTemperature: colorTemperature,\n            brightness: brightness,\n            transition: 10\n            }\n        }\n    return newMsg\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2518,7 +2544,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 270,
+        "x": 250,
         "y": 500,
         "wires": [
             [
@@ -2627,7 +2653,7 @@
         "type": "function",
         "z": "b798ba0e.5afac8",
         "name": "set entities",
-        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nif(switches.bureau_lichtgestuurd != 'on') return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Bureau'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    return msg\n}\n\n",
+        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nif(!switches.bureau_lichtgestuurd) return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Bureau'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    return msg\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2646,7 +2672,7 @@
         "type": "function",
         "z": "b798ba0e.5afac8",
         "name": "set entities",
-        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nif(switches.praktijk_agendagestuurd != 'on') return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Bureau'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: false}\n    return msg\n}",
+        "func": "let lights      = global.get('lighting.lights')\nlet switches    = global.get('switches')\n\nif(!switches.praktijk_agendagestuurd) return\n\nlet entities = Object.keys(lights)\n.map(function(key) {\n    return {key: key, object: lights[key]}\n})\n.filter(light => light.object.name.includes('Praktijk'))\n.map(function(light) {\n    return parseInt(light.key);\n})\n\nif (entities.length > 0){\n    msg.topic = entities\n    msg.payload = {onOff: false}\n    return msg\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3131,7 +3157,7 @@
                 "t": "set",
                 "p": "switches.bureau_lichtgestuurd",
                 "pt": "global",
-                "to": "msg.payload.On ? \"on\" : \"off\"",
+                "to": "msg.payload.On ? true : false",
                 "tot": "jsonata"
             },
             {
@@ -3148,7 +3174,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
                 "df918f0df9bffdd1"
@@ -3165,7 +3191,7 @@
                 "t": "set",
                 "p": "switches.felix_lichtgestuurd",
                 "pt": "global",
-                "to": "msg.payload.On ? \"on\" : \"off\"",
+                "to": "msg.payload.On ? true : false",
                 "tot": "jsonata"
             },
             {
@@ -3199,7 +3225,7 @@
                 "t": "set",
                 "p": "switches.praktijk_agendagestuurd",
                 "pt": "global",
-                "to": "msg.payload.On ? \"on\" : \"off\"",
+                "to": "msg.payload.On ? true : false",
                 "tot": "jsonata"
             },
             {
@@ -3228,7 +3254,7 @@
         "type": "function",
         "z": "ac61d6b63edc7d80",
         "name": "Set up inputs",
-        "func": "let msg0 = msg1 = msg2 = msg3 = {}\nlet switches = global.get('switches')\n\nmsg0.payload = {\n \"On\": switches.bureau_lichtgestuurd == 'on' ? true : false\n}\n\nmsg1.payload = {\n \"On\": switches.felix_lichtgestuurd  == 'on'? true : false\n}\n\nmsg2.payload = {\n \"On\": switches.felix_ontwaaklicht == 'on' ? true : false\n}\n\nmsg3.payload = {\n \"On\": switches.praktijk_agendagestuurd == 'on'  ? true : false\n}\n\nreturn [msg0,msg1,msg2,msg3];",
+        "func": "let msg0 = msg1 = msg2 = msg3 = {}\nlet switches = global.get('switches')\n\nmsg0.payload = {\n \"On\": switches.bureau_lichtgestuurd\n}\n\nmsg1.payload = {\n \"On\": switches.felix_lichtgestuurd\n}\n\nmsg2.payload = {\n \"On\": switches.felix_ontwaaklicht\n}\n\nmsg3.payload = {\n \"On\": switches.praktijk_agendagestuurd\n}\n\nreturn [msg0,msg1,msg2,msg3];",
         "outputs": 4,
         "noerr": 0,
         "initialize": "",
@@ -3446,7 +3472,7 @@
         "links": [
             "950b4130.80c738"
         ],
-        "x": 795,
+        "x": 875,
         "y": 600,
         "wires": []
     },
@@ -3507,8 +3533,8 @@
             {
                 "t": "set",
                 "p": "switches.felix_ontwaaklicht",
-                "pt": "global",
-                "to": "msg.payload.On ? \"on\" : \"off\"",
+                "pt": "msg",
+                "to": "msg.payload.On ? true : false",
                 "tot": "jsonata"
             },
             {
@@ -3524,7 +3550,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 600,
+        "x": 620,
         "y": 420,
         "wires": [
             [
